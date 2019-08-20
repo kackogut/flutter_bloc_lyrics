@@ -1,5 +1,5 @@
 #Secrets
-**/secrets.dart
+**/lib/**/secrets.dart
 
 # Miscellaneous
 *.class
