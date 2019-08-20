@@ -1,3 +1,6 @@
+#Secrets
+**/secrets.dart
+
 # Miscellaneous
 *.class
 *.lock
