@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:flutter_bloc_lyrics/constants/secrets.dart';
 import 'package:flutter_bloc_lyrics/model/search_result.dart';
 import 'package:flutter_bloc_lyrics/model/search_result_error.dart';
 import 'package:http/http.dart' as http;
@@ -15,7 +17,10 @@ class LyricsClient {
 
 
   Future<SearchResult> searchSongs(String query) async {
-    final response = await httpClient.get(Uri.parse("$baseUrl$query"));
+    final response = await httpClient.get(
+        Uri.parse("$baseUrl$query"),
+        headers: {HttpHeaders.authorizationHeader: GENIUS_KEY},
+    );
     final results = json.decode(response.body);
 
     if(response.statusCode == 200){
