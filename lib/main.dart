@@ -1,17 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_lyrics/repository/lyrics_client.dart';
+import 'package:flutter_bloc_lyrics/repository/lyrics_repository.dart';
 
-void main() => runApp(MyApp());
+import 'feature/song_search/bloc/songs_search_bloc.dart';
+import 'feature/song_search/ui/search_screen.dart';
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+void main() {
+  final LyricsRepository _lyricsRepository = LyricsRepository(LyricsClient());
+
+  runApp(LyricsApp(lyricsRepository: _lyricsRepository));
+}
+
+class LyricsApp extends StatelessWidget {
+  final LyricsRepository lyricsRepository;
+
+  const LyricsApp({Key key, @required this.lyricsRepository}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+      title: 'Lyrics App',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Lyrics App"),
+        ),
+        body: BlocProvider(
+          builder: (context) =>
+              SongsSearchBloc(lyricsRepository: lyricsRepository),
+          child: SearchScreen(),
+        ),
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -30,7 +49,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     setState(() {
-
       _counter++;
     });
   }
@@ -43,7 +61,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(

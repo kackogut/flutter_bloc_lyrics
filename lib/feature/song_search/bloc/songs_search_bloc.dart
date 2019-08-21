@@ -33,7 +33,7 @@ class SongsSearchBloc extends Bloc<SongSearchEvent, SongsSearchState> {
 
   @override
   Stream<SongsSearchState> mapEventToState(SongSearchEvent event) async* {
-    if(event is SongSearchTextChanged){
+    if(event is TextChanged){
       final String searchQuery = event.query;
       if(searchQuery.isEmpty){
         yield SearchStateEmpty();
