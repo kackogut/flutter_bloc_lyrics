@@ -29,7 +29,7 @@ class _SearchBarState extends State<SearchBar>{
       },
       decoration: InputDecoration(
         prefixIcon: Icon(Icons.search),
-        hintText: "Search..."
+        hintText: "Search online lyrics"
       ),
     );
   }
