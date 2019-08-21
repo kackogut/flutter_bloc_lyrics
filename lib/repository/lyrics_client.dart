@@ -19,7 +19,7 @@ class LyricsClient {
   Future<SearchResult> searchSongs(String query) async {
     final response = await httpClient.get(
         Uri.parse("$baseUrl$query"),
-        headers: {HttpHeaders.authorizationHeader: GENIUS_KEY},
+        headers: {HttpHeaders.authorizationHeader: "Bearer $GENIUS_KEY"},
     );
     final results = json.decode(response.body);
 

@@ -11,14 +11,14 @@ class SearchResult {
 }
 
 class SearchItems {
-  final List<SongResultItem> songs;
+  final List<SongSearchResult> songs;
 
   const SearchItems({this.songs});
 
   static SearchItems fromJson(Map<String, dynamic> json) {
     final items = (json['hits'] as List<dynamic>)
         .map((dynamic item) =>
-          SongResultItem.fromJson(item as Map<String, dynamic>))
+        SongSearchResult.fromJson(item as Map<String, dynamic>))
         .toList();
     return SearchItems(songs: items);
   }

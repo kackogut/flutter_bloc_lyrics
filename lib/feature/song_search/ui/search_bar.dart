@@ -27,6 +27,10 @@ class _SearchBarState extends State<SearchBar>{
       onChanged: (text) {
         _songSearchBloc.dispatch(TextChanged(query: text));
       },
+      decoration: InputDecoration(
+        prefixIcon: Icon(Icons.search),
+        hintText: "Search..."
+      ),
     );
   }
 

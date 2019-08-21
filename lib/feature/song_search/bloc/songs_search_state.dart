@@ -18,7 +18,7 @@ class SearchStateLoading extends SongsSearchState {
 }
 
 class SearchStateSuccess extends SongsSearchState {
-  final List<SongResultItem> songs;
+  final List<SongSearchResult> songs;
 
   SearchStateSuccess(this.songs) : super([songs]);
 

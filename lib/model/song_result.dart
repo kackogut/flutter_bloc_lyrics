@@ -1,3 +1,15 @@
+class SongSearchResult {
+    final SongResultItem songResultItem;
+
+    const SongSearchResult({this.songResultItem});
+
+    static SongSearchResult fromJson(dynamic json) {
+      return SongSearchResult(
+          songResultItem: SongResultItem.fromJson(json['result']));
+    }
+
+}
+
 class SongResultItem {
   final String title;
   final String lyricsURL;
