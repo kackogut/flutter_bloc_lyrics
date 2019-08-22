@@ -1,3 +1,5 @@
+import 'package:flutter_bloc_lyrics/model/song_base.dart';
+
 class SongSearchResult {
     final SongResultItem songResultItem;
 
@@ -10,17 +12,14 @@ class SongSearchResult {
 
 }
 
-class SongResultItem {
-  final int localID;
-  final String title;
-  final String lyricsURL;
-  final String thumbnailURL;
+class SongResultItem extends SongBase{
 
-  const SongResultItem({this.title, this.lyricsURL, this.thumbnailURL, this.localID});
+  const SongResultItem({title, lyricsURL, thumbnailURL})
+    : super(title: title, lyricsURL: lyricsURL, albumThumbnail: thumbnailURL);
 
   static SongResultItem fromJson(dynamic json) {
     return SongResultItem(
-        title: json['full_title'] as String,
+        title: json['title'] as String,
         lyricsURL: json['url'] as String,
         thumbnailURL: json['header_image_thumbnail_url'] as String);
   }

@@ -12,13 +12,11 @@ import 'local_client.dart';
 
 class LyricsClient {
   final http.Client httpClient;
-  final LocalClient localClient;
 
   final String baseUrl = "https://api.genius.com/search?q=";
 
   LyricsClient({httpClient, localClient})
-      : this.httpClient = httpClient ?? http.Client(),
-        this.localClient = localClient ?? LocalClient();
+      : this.httpClient = httpClient ?? http.Client();
 
   Future<SearchItems> searchSongs(String query) async {
     final response = await httpClient.get(
@@ -28,20 +26,9 @@ class LyricsClient {
     final results = json.decode(response.body);
 
     if (response.statusCode == 200) {
-      SearchItems searchResult = SearchResult.fromJson(results).searchItems;
-      searchResult.songs.addAll(await localClient.getSongs(query));
-
       return SearchResult.fromJson(results).searchItems;
     } else {
       throw MetaResponse.fromJson(results).searchResultError;
     }
-  }
-
-  Future<void> removeSong(int songIndex){
-    return localClient.removeSong(songIndex);
-  }
-
-  Future<void> addSong(SongResultItem song){
-    return localClient.addSong(song);
   }
 }

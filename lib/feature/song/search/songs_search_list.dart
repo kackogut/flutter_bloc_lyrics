@@ -4,6 +4,7 @@ import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_bloc.dart';
 import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_state.dart';
 import 'package:flutter_bloc_lyrics/feature/song/details/song_details_screen.dart';
 import 'package:flutter_bloc_lyrics/model/api/song_result.dart';
+import 'package:flutter_bloc_lyrics/model/song_base.dart';
 
 class SongsSearchList extends StatelessWidget {
   @override
@@ -18,7 +19,7 @@ class SongsSearchList extends StatelessWidget {
           return Text(state.error);
         }
         if (state is SearchStateSuccess) {
-          return state.props.isEmpty
+          return state.songs.isEmpty
               ? Text("No items")
               : Expanded(
                   child: _SongsSearchResults(
@@ -34,7 +35,7 @@ class SongsSearchList extends StatelessWidget {
 }
 
 class _SongsSearchResults extends StatelessWidget {
-  final List<SongSearchResult> songsList;
+  final List<SongBase> songsList;
 
   const _SongsSearchResults({Key key, @required this.songsList})
       : super(key: key);
@@ -45,14 +46,14 @@ class _SongsSearchResults extends StatelessWidget {
         itemCount: songsList.length,
         itemBuilder: (BuildContext context, int index) {
           return _SongSearchResultItem(
-            song: songsList[index].songResultItem,
+            song: songsList[index],
           );
         });
   }
 }
 
 class _SongSearchResultItem extends StatelessWidget {
-  final SongResultItem song;
+  final SongBase song;
 
   const _SongSearchResultItem({Key key, this.song}) : super(key: key);
 
@@ -61,8 +62,8 @@ class _SongSearchResultItem extends StatelessWidget {
     return Padding(
         padding: EdgeInsets.symmetric(vertical: 8.0),
         child: ListTile(
-          leading: Image.network(
-            song.thumbnailURL,
+          leading: song.albumThumbnail == null ? Icon(Icons.sd_card) : Image.network(
+            song.albumThumbnail,
           ),
           title: Text(song.title),
           onTap: () {

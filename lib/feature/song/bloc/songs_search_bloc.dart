@@ -8,7 +8,7 @@ import 'package:flutter_bloc_lyrics/repository/lyrics_repository.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
-class SongsSearchBloc extends Bloc<SongSearchEvent, SongsSearchState> {
+class SongsSearchBloc extends Bloc<SongEvent, SongsSearchState> {
   final LyricsRepository lyricsRepository;
 
   SongsSearchBloc({@required this.lyricsRepository});
@@ -17,10 +17,10 @@ class SongsSearchBloc extends Bloc<SongSearchEvent, SongsSearchState> {
   SongsSearchState get initialState => SearchStateEmpty();
 
   @override
-  Stream<SongsSearchState> transformEvents(Stream<SongSearchEvent> events,
-      Stream<SongsSearchState> Function(SongSearchEvent event) next) {
+  Stream<SongsSearchState> transformEvents(Stream<SongEvent> events,
+      Stream<SongsSearchState> Function(SongEvent event) next) {
     return super.transformEvents(
-      (events as Observable<SongSearchEvent>).debounceTime(
+      (events as Observable<SongEvent>).debounceTime(
         Duration(milliseconds: 500),
       ),
       next,
@@ -28,29 +28,44 @@ class SongsSearchBloc extends Bloc<SongSearchEvent, SongsSearchState> {
   }
 
   @override
-  Stream<SongsSearchState> mapEventToState(SongSearchEvent event) async* {
+  Stream<SongsSearchState> mapEventToState(SongEvent event) async* {
     if (event is TextChanged) {
-      final String searchQuery = event.query;
-      if (searchQuery.isEmpty) {
-        yield SearchStateEmpty();
-      } else {
-        yield SearchStateLoading();
+      yield* _mapSongSearchTextChangedToState(event);
+    }
+    if(event is AddSong) {
+      yield* _mapSongAddToState(event);
+    }
+  }
 
-        try {
-          final result = await lyricsRepository.searchSongs(searchQuery);
-          yield SearchStateSuccess(result.songs);
-        } catch (error) {
-          //TODO Add localization to default error
-          yield error is SearchResultError
-              ? SearchStateError(error.message)
-              : SearchStateError("Default error");
-        }
+  Stream<SongsSearchState> _mapSongSearchTextChangedToState(TextChanged event) async* {
+    final String searchQuery = event.query;
+    if (searchQuery.isEmpty) {
+      yield SearchStateEmpty();
+    } else {
+      yield SearchStateLoading();
+
+      try {
+        final result = await lyricsRepository.searchSongs(searchQuery);
+        yield SearchStateSuccess(result);
+      } catch (error) {
+        yield error is SearchResultError
+            ? SearchStateError(error.message)
+            : SearchStateError("Default error");
       }
     }
   }
 
+  Stream<SongsSearchState> _mapSongAddToState(AddSong event) async* {
+
+    await lyricsRepository.addSong(event.song);
+    //    if(currentState is SearchStateSuccess) {
+//      yield SearchStateLoading();
+//
+//    }
+  }
+
   @override
-  void onTransition(Transition<SongSearchEvent, SongsSearchState> transition) {
+  void onTransition(Transition<SongEvent, SongsSearchState> transition) {
     print(transition);
   }
 }

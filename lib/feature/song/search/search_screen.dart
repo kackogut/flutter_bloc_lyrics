@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc_lyrics/feature/song/add/song_add_screen.dart';
-import 'package:flutter_bloc_lyrics/feature/song/search/ui/search_bar.dart';
-import 'package:flutter_bloc_lyrics/feature/song/search/ui/songs_search_list.dart';
+import 'package:flutter_bloc_lyrics/feature/song/search/search_bar.dart';
+import 'package:flutter_bloc_lyrics/feature/song/search/songs_search_list.dart';
 
 class SearchScreen extends StatelessWidget {
   @override

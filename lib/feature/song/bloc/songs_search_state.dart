@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc_lyrics/model/api/song_result.dart';
+import 'package:flutter_bloc_lyrics/model/song_base.dart';
 
 abstract class SongsSearchState extends Equatable {
   SongsSearchState([List props = const []]) : super(props);
@@ -16,7 +17,7 @@ class SearchStateLoading extends SongsSearchState {
 }
 
 class SearchStateSuccess extends SongsSearchState {
-  final List<SongSearchResult> songs;
+  final List<SongBase> songs;
 
   SearchStateSuccess(this.songs) : super([songs]);
 
