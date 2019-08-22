@@ -1,4 +1,4 @@
-import 'package:flutter_bloc_lyrics/model/song_result.dart';
+import 'package:flutter_bloc_lyrics/model/api/song_result.dart';
 
 class SearchResult {
   final SearchItems searchItems;

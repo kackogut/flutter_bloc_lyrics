@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_bloc_lyrics/constants/secrets.dart';
-import 'package:flutter_bloc_lyrics/model/search_result.dart';
-import 'package:flutter_bloc_lyrics/model/search_result_error.dart';
+import 'package:flutter_bloc_lyrics/model/api/search_result.dart';
+import 'package:flutter_bloc_lyrics/model/api/search_result_error.dart';
 import 'package:http/http.dart' as http;
 
 

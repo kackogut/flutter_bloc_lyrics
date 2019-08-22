@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:flutter_bloc_lyrics/feature/song_search/bloc/songs_search_event.dart';
-import 'package:flutter_bloc_lyrics/feature/song_search/bloc/songs_search_state.dart';
-import 'package:flutter_bloc_lyrics/model/search_result_error.dart';
+import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_event.dart';
+import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_state.dart';
+import 'package:flutter_bloc_lyrics/model/api/search_result_error.dart';
 import 'package:flutter_bloc_lyrics/repository/lyrics_repository.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_lyrics/feature/song_details/song_details_screen.dart';
-import 'package:flutter_bloc_lyrics/feature/song_search/bloc/songs_search_bloc.dart';
-import 'package:flutter_bloc_lyrics/feature/song_search/bloc/songs_search_state.dart';
-import 'package:flutter_bloc_lyrics/model/song_result.dart';
+import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_bloc.dart';
+import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_state.dart';
+import 'package:flutter_bloc_lyrics/feature/song/details/song_details_screen.dart';
+import 'package:flutter_bloc_lyrics/model/api/song_result.dart';
 
 class SongsSearchList extends StatelessWidget {
   @override
