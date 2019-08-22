@@ -11,5 +11,4 @@ class TextChanged extends SongSearchEvent {
 
   @override
   String toString() => "SongSearchTextChanged { query: $query }";
-
 }

@@ -4,6 +4,7 @@ import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 class SongDetailsScreen extends StatelessWidget {
   final String songDetailsURL;
+
   SongDetailsScreen(this.songDetailsURL);
 
   @override
@@ -15,5 +16,4 @@ class SongDetailsScreen extends StatelessWidget {
       ),
     );
   }
-
 }

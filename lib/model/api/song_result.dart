@@ -11,11 +11,12 @@ class SongSearchResult {
 }
 
 class SongResultItem {
+  final int localID;
   final String title;
   final String lyricsURL;
   final String thumbnailURL;
 
-  const SongResultItem({this.title, this.lyricsURL, this.thumbnailURL});
+  const SongResultItem({this.title, this.lyricsURL, this.thumbnailURL, this.localID});
 
   static SongResultItem fromJson(dynamic json) {
     return SongResultItem(

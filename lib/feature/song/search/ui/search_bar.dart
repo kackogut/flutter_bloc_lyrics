@@ -6,13 +6,11 @@ import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_event.dart';
 class SearchBar extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _SearchBarState();
-
 }
 
-class _SearchBarState extends State<SearchBar>{
+class _SearchBarState extends State<SearchBar> {
   final _songSearchController = TextEditingController();
   SongsSearchBloc _songSearchBloc;
-
 
   @override
   void initState() {
@@ -28,9 +26,7 @@ class _SearchBarState extends State<SearchBar>{
         _songSearchBloc.dispatch(TextChanged(query: text));
       },
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.search),
-        hintText: "Search online lyrics"
-      ),
+          prefixIcon: Icon(Icons.search), hintText: "Search online lyrics"),
     );
   }
 
@@ -39,6 +35,4 @@ class _SearchBarState extends State<SearchBar>{
     _songSearchController.dispose();
     super.dispose();
   }
-
-
 }

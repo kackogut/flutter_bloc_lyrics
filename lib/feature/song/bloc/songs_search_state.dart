@@ -6,13 +6,11 @@ abstract class SongsSearchState extends Equatable {
 }
 
 class SearchStateEmpty extends SongsSearchState {
-
   @override
   String toString() => 'SearchStateEmpty';
 }
 
 class SearchStateLoading extends SongsSearchState {
-
   @override
   String toString() => 'SearchStateLoading';
 }

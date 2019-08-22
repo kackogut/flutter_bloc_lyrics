@@ -6,7 +6,6 @@ import 'package:flutter_bloc_lyrics/repository/lyrics_repository.dart';
 import 'feature/song/bloc/songs_search_bloc.dart';
 import 'feature/song/search/ui/search_screen.dart';
 
-
 void main() {
   final LyricsRepository _lyricsRepository = LyricsRepository(LyricsClient());
 
@@ -20,10 +19,10 @@ class LyricsApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        builder: (context) =>
-            SongsSearchBloc(lyricsRepository: lyricsRepository),
-        child: SearchScreen());
+    return MaterialApp(
+        home: BlocProvider(
+            builder: (context) =>
+                SongsSearchBloc(lyricsRepository: lyricsRepository),
+            child: SearchScreen()));
   }
 }
-

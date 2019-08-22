@@ -66,8 +66,10 @@ class _SongSearchResultItem extends StatelessWidget {
           ),
           title: Text(song.title),
           onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => SongDetailsScreen(song.lyricsURL)));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SongDetailsScreen(song.lyricsURL)));
           },
         ));
   }
