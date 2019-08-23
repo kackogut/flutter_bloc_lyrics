@@ -5,7 +5,7 @@ import 'package:flutter_bloc_lyrics/model/song_base.dart';
 class LocalClient {
   final List<SongBase> localSongsList = List();
 
-  Future<void> addSong(SongResultItem song) async {
+  Future<void> addSong(SongBase song) async {
     await Future.delayed(Duration(microseconds: 100));
     localSongsList.add(song);
   }

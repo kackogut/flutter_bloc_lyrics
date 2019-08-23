@@ -70,7 +70,7 @@ class _SongSearchResultItem extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => SongDetailsScreen(song.lyricsURL)));
+                    builder: (context) => SongDetailsScreen(song)));
           },
         ));
   }

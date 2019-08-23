@@ -23,7 +23,7 @@ class LyricsRepository {
     await localClient.removeSong(songIndex);
   }
 
-  Future<void> addSong(SongResultItem song) async{
+  Future<void> addSong(SongBase song) async{
     await localClient.addSong(song);
   }
 }
