@@ -17,6 +17,9 @@ class LocalSongDetails extends StatelessWidget {
             child: SingleChildScrollView(
                 child: Column(
               children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(top: 8.0),
+                ),
                 Text(
                   song.artist,
                   style: Theme.of(context).textTheme.title,

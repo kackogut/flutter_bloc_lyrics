@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_bloc.dart';
 import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_event.dart';
+import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_state.dart';
 import 'package:flutter_bloc_lyrics/model/song_base.dart';
 import 'package:flutter_bloc_lyrics/widgets/buttons.dart';
 
@@ -28,7 +29,15 @@ class SongAddState extends State<SongAddForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return
+      BlocListener<SongsSearchBloc, SongsSearchState>(
+    bloc: _songSearchBloc,
+    listener: (context, state){
+      if(state is AddSongStateSuccess){
+        Navigator.pop(context);
+      }
+    },
+    child:  Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.0),
         child: Form(
             key: _formKey,
@@ -74,10 +83,9 @@ class SongAddState extends State<SongAddForm> {
                                     title: _title,
                                     lyrics: _lyrics,
                                     artist: _artist)));
-                            Navigator.pop(context);
                           }},
                         text: "Add song"))
               ],
-            )));
+            ))));
   }
 }

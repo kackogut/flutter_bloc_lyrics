@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_bloc.dart';
+import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_event.dart';
 import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_state.dart';
 import 'package:flutter_bloc_lyrics/feature/song/details/song_details_screen.dart';
 import 'package:flutter_bloc_lyrics/model/api/song_result.dart';
@@ -59,6 +60,16 @@ class _SongSearchResultItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return song.lyricsURL != null ? _getSongDetailsLayout(context) :
+        Dismissible(
+          background: Container(color: Colors.red,),
+            onDismissed: (direction){
+              BlocProvider.of<SongsSearchBloc>(context).dispatch(RemoveSong(songID: song.id));
+            },
+            key: Key(UniqueKey().toString()), child: _getSongDetailsLayout(context));
+  }
+
+  Padding _getSongDetailsLayout(BuildContext context){
     return Padding(
         padding: EdgeInsets.symmetric(vertical: 8.0),
         child: ListTile(

@@ -18,11 +18,17 @@ class SearchStateLoading extends SongsSearchState {
 
 class SearchStateSuccess extends SongsSearchState {
   final List<SongBase> songs;
+  final String query;
 
-  SearchStateSuccess(this.songs) : super([songs]);
+  SearchStateSuccess(this.songs, this.query) : super([songs]);
 
   @override
   String toString() => 'SearchStateSuccess { songs: ${songs.length} }';
+}
+
+class AddSongStateSuccess extends SongsSearchState {
+  @override
+  String toString() => 'AddSongSuccess';
 }
 
 class SearchStateError extends SongsSearchState {

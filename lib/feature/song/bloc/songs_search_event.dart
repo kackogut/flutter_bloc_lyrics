@@ -23,3 +23,12 @@ class AddSong extends SongEvent {
   @override
   String toString() => "AddSong { song ${song.id}";
 }
+
+class RemoveSong extends SongEvent {
+  final int songID;
+
+  RemoveSong({this.songID}) : super([songID]);
+
+  @override
+  String toString() => "Remove song { songID: $songID }";
+}

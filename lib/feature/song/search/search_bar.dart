@@ -26,7 +26,7 @@ class _SearchBarState extends State<SearchBar> {
         _songSearchBloc.dispatch(TextChanged(query: text));
       },
       decoration: InputDecoration(
-          prefixIcon: Icon(Icons.search), hintText: "Search online lyrics"),
+          prefixIcon: Icon(Icons.search), hintText: "Search lyrics"),
     );
   }
 

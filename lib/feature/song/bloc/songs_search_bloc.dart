@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_event.dart';
 import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_state.dart';
 import 'package:flutter_bloc_lyrics/model/api/search_result_error.dart';
+import 'package:flutter_bloc_lyrics/model/song_base.dart';
 import 'package:flutter_bloc_lyrics/repository/lyrics_repository.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
@@ -32,12 +33,16 @@ class SongsSearchBloc extends Bloc<SongEvent, SongsSearchState> {
     if (event is TextChanged) {
       yield* _mapSongSearchTextChangedToState(event);
     }
-    if(event is AddSong) {
+    if (event is AddSong) {
       yield* _mapSongAddToState(event);
+    }
+    if(event is RemoveSong){
+      yield* _mapSongRemoveToState(event);
     }
   }
 
-  Stream<SongsSearchState> _mapSongSearchTextChangedToState(TextChanged event) async* {
+  Stream<SongsSearchState> _mapSongSearchTextChangedToState(
+      TextChanged event) async* {
     final String searchQuery = event.query;
     if (searchQuery.isEmpty) {
       yield SearchStateEmpty();
@@ -46,7 +51,7 @@ class SongsSearchBloc extends Bloc<SongEvent, SongsSearchState> {
 
       try {
         final result = await lyricsRepository.searchSongs(searchQuery);
-        yield SearchStateSuccess(result);
+        yield SearchStateSuccess(result, searchQuery);
       } catch (error) {
         yield error is SearchResultError
             ? SearchStateError(error.message)
@@ -56,11 +61,28 @@ class SongsSearchBloc extends Bloc<SongEvent, SongsSearchState> {
   }
 
   Stream<SongsSearchState> _mapSongAddToState(AddSong event) async* {
+    SongBase updatedSong = await lyricsRepository.addSong(event.song);
+    if (currentState is SearchStateSuccess) {
+      SearchStateSuccess state = currentState;
+      List<SongBase> updatedList =
+          (currentState as SearchStateSuccess).songs;
 
-    await lyricsRepository.addSong(event.song);
-    //    if(currentState is SearchStateSuccess) {
-//      yield SearchStateLoading();
-//
+      yield AddSongStateSuccess();
+
+      if (updatedSong.isInQuery(state.query)) {
+        updatedList..insert(0, updatedSong);
+      }
+      yield SearchStateSuccess(updatedList, state.query);
+    } else {
+      yield AddSongStateSuccess();
+    }
+  }
+
+  Stream<SongsSearchState> _mapSongRemoveToState(RemoveSong event) async* {
+    await lyricsRepository.removeSong(event.songID);
+//    if(state is SearchStateSuccess){
+//      SearchStateSuccess state = currentState;
+//      yield SearchStateSuccess(state.songs, state.query);
 //    }
   }
 
