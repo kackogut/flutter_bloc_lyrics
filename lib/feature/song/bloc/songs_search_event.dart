@@ -24,6 +24,15 @@ class AddSong extends SongEvent {
   String toString() => "AddSong { song ${song.id}";
 }
 
+class EditSong extends SongEvent {
+  final SongBase song;
+
+  EditSong({this.song}) :super([song]);
+
+  @override
+  String toString() => "EditSong { song ${song.id}";
+}
+
 class RemoveSong extends SongEvent {
   final int songID;
 

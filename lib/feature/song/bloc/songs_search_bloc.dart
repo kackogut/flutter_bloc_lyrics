@@ -39,6 +39,9 @@ class SongsSearchBloc extends Bloc<SongEvent, SongsSearchState> {
     if(event is RemoveSong){
       yield* _mapSongRemoveToState(event);
     }
+    if(event is EditSong){
+      yield* _mapSongEditToState(event);
+    }
   }
 
   Stream<SongsSearchState> _mapSongSearchTextChangedToState(
@@ -67,14 +70,14 @@ class SongsSearchBloc extends Bloc<SongEvent, SongsSearchState> {
       List<SongBase> updatedList =
           (currentState as SearchStateSuccess).songs;
 
-      yield AddSongStateSuccess();
+      yield AddEditSongStateSuccess();
 
       if (updatedSong.isInQuery(state.query)) {
         updatedList..insert(0, updatedSong);
       }
       yield SearchStateSuccess(updatedList, state.query);
     } else {
-      yield AddSongStateSuccess();
+      yield AddEditSongStateSuccess();
     }
   }
 
@@ -86,6 +89,15 @@ class SongsSearchBloc extends Bloc<SongEvent, SongsSearchState> {
 //    }
   }
 
+  Stream<SongsSearchState> _mapSongEditToState(EditSong event) async* {
+    SongBase updatedSong = await lyricsRepository.editSong(event.song);
+    if (currentState is SearchStateSuccess) {
+      yield AddEditSongStateSuccess();
+    } else {
+      yield AddEditSongStateSuccess();
+    }
+  }
+  
   @override
   void onTransition(Transition<SongEvent, SongsSearchState> transition) {
     print(transition);

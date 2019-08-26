@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc_lyrics/feature/song/add/song_add_edit_screen.dart';
 import 'package:flutter_bloc_lyrics/model/song_base.dart';
 
 class LocalSongDetails extends StatelessWidget {
@@ -9,36 +10,55 @@ class LocalSongDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Song details"),
-        ),
-        body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
-            child: SingleChildScrollView(
-                child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(top: 8.0),
-                ),
-                Text(
-                  song.artist,
-                  style: Theme.of(context).textTheme.title,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 8.0),
-                ),
-                Text(
-                  song.title,
-                  style: Theme.of(context).textTheme.headline,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 16.0),
-                ),
-                Text(
-                  song.lyrics,
-                  style: Theme.of(context).textTheme.body2,
-                )
-              ],
-            ))));
+      appBar: AppBar(
+        title: Text("Song details"),
+      ),
+      body: _getScreenBody(context),
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SongAddScreen(song:song)));
+      },
+        tooltip: "Edit", child: Icon(Icons.edit),),);
   }
+
+  Padding _getScreenBody(BuildContext context) =>
+      Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0),
+          child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(top: 8.0),
+                  ),
+                  Text(
+                    song.artist,
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .title,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 8.0),
+                  ),
+                  Text(
+                    song.title,
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .headline,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 16.0),
+                  ),
+                  Text(
+                    song.lyrics,
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .body2,
+                  )
+                ],
+              )));
 }

@@ -26,7 +26,7 @@ class SearchStateSuccess extends SongsSearchState {
   String toString() => 'SearchStateSuccess { songs: ${songs.length} }';
 }
 
-class AddSongStateSuccess extends SongsSearchState {
+class AddEditSongStateSuccess extends SongsSearchState {
   @override
   String toString() => 'AddSongSuccess';
 }
