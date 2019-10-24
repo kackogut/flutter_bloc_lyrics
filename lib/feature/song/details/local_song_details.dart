@@ -1,21 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_lyrics/feature/song/add/song_add_edit_screen.dart';
+import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_bloc.dart';
+import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_event.dart';
+import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_state.dart';
 import 'package:flutter_bloc_lyrics/model/song_base.dart';
 
-class LocalSongDetails extends StatelessWidget {
+class LocalSongDetails extends StatefulWidget {
   final SongBase song;
 
   LocalSongDetails({this.song});
 
   @override
+  State<StatefulWidget> createState() {
+    return LocalSongDetailsState(song);
+  }
+}
+
+class LocalSongDetailsState extends State<LocalSongDetails> {
+  SongBase song;
+
+  SongsSearchBloc _songSearchBloc;
+
+  LocalSongDetailsState(this.song);
+
+  @override
+  void initState() {
+    super.initState();
+    _songSearchBloc = BlocProvider.of<SongsSearchBloc>(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Song details"),
-      ),
-      body: _getScreenBody(context),
-      floatingActionButton: _getFloatingButton(context),
-    );
+    return BlocListener<SongsSearchBloc, SongsSearchState>(
+        bloc: _songSearchBloc,
+        listener: (context, state) {
+          if (state is EditSongStateSuccess) {
+            setState(() {
+              song = state.song;
+            });
+          }
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text("Song details"),
+          ),
+          body: _getScreenBody(context),
+          floatingActionButton: _getFloatingButton(context),
+        ));
   }
 
   Padding _getScreenBody(BuildContext context) => Padding(

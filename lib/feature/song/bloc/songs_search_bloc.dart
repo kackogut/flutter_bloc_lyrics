@@ -91,11 +91,7 @@ class SongsSearchBloc extends Bloc<SongEvent, SongsSearchState> {
 
   Stream<SongsSearchState> _mapSongEditToState(EditSong event) async* {
     SongBase updatedSong = await lyricsRepository.editSong(event.song);
-    if (currentState is SearchStateSuccess) {
-      yield AddEditSongStateSuccess();
-    } else {
-      yield AddEditSongStateSuccess();
-    }
+    yield EditSongStateSuccess(updatedSong);
   }
 
   @override

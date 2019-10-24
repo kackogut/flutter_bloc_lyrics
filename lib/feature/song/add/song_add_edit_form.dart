@@ -40,7 +40,7 @@ class SongAddState extends State<SongAddForm> {
     return BlocListener<SongsSearchBloc, SongsSearchState>(
         bloc: _songSearchBloc,
         listener: (context, state) {
-          if (state is AddEditSongStateSuccess) {
+          if (state is AddEditSongStateSuccess || state is EditSongStateSuccess) {
             Navigator.pop(context);
           }
         },
