@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc_lyrics/model/api/song_result.dart';
 import 'package:flutter_bloc_lyrics/model/song_base.dart';
 
 abstract class SongsSearchState extends Equatable {

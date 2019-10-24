@@ -17,10 +17,8 @@ class SearchScreen extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => SongAddScreen()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => SongAddScreen()));
           },
           child: Icon(Icons.add),
         ),

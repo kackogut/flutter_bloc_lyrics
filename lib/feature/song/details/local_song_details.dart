@@ -14,51 +14,45 @@ class LocalSongDetails extends StatelessWidget {
         title: Text("Song details"),
       ),
       body: _getScreenBody(context),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => SongAddScreen(song:song)));
-      },
-        tooltip: "Edit", child: Icon(Icons.edit),),);
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SongAddScreen(song: song)));
+        },
+        tooltip: "Edit",
+        child: Icon(Icons.edit),
+      ),
+    );
   }
 
-  Padding _getScreenBody(BuildContext context) =>
-      Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(top: 8.0),
-                  ),
-                  Text(
-                    song.artist,
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .title,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 8.0),
-                  ),
-                  Text(
-                    song.title,
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .headline,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 16.0),
-                  ),
-                  Text(
-                    song.lyrics,
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .body2,
-                  )
-                ],
-              )));
+  Padding _getScreenBody(BuildContext context) => Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.0),
+      child: SingleChildScrollView(
+          child: Column(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(top: 8.0),
+          ),
+          Text(
+            song.artist,
+            style: Theme.of(context).textTheme.title,
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 8.0),
+          ),
+          Text(
+            song.title,
+            style: Theme.of(context).textTheme.headline,
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 16.0),
+          ),
+          Text(
+            song.lyrics,
+            style: Theme.of(context).textTheme.body2,
+          )
+        ],
+      )));
 }

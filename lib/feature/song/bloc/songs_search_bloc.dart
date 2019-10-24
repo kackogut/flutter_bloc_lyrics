@@ -36,10 +36,10 @@ class SongsSearchBloc extends Bloc<SongEvent, SongsSearchState> {
     if (event is AddSong) {
       yield* _mapSongAddToState(event);
     }
-    if(event is RemoveSong){
+    if (event is RemoveSong) {
       yield* _mapSongRemoveToState(event);
     }
-    if(event is EditSong){
+    if (event is EditSong) {
       yield* _mapSongEditToState(event);
     }
   }
@@ -67,8 +67,7 @@ class SongsSearchBloc extends Bloc<SongEvent, SongsSearchState> {
     SongBase updatedSong = await lyricsRepository.addSong(event.song);
     if (currentState is SearchStateSuccess) {
       SearchStateSuccess state = currentState;
-      List<SongBase> updatedList =
-          (currentState as SearchStateSuccess).songs;
+      List<SongBase> updatedList = (currentState as SearchStateSuccess).songs;
 
       yield AddEditSongStateSuccess();
 
@@ -97,7 +96,7 @@ class SongsSearchBloc extends Bloc<SongEvent, SongsSearchState> {
       yield AddEditSongStateSuccess();
     }
   }
-  
+
   @override
   void onTransition(Transition<SongEvent, SongsSearchState> transition) {
     print(transition);

@@ -83,15 +83,13 @@ class SongAddState extends State<SongAddForm> {
                               if (_formKey.currentState.validate()) {
                                 _formKey.currentState.save();
                                 SongBase updatedSong = SongBase(
-                                  id: _song == null ? null : _song.id,
+                                    id: _song == null ? null : _song.id,
                                     title: _title,
                                     lyrics: _lyrics,
                                     artist: _artist);
-                                _songSearchBloc.dispatch(
-                                    _song == null ?
-                                    AddSong(
-                                    song: updatedSong)
-                                : EditSong(song: updatedSong));
+                                _songSearchBloc.dispatch(_song == null
+                                    ? AddSong(song: updatedSong)
+                                    : EditSong(song: updatedSong));
                               }
                             },
                             text: _song != null ? "Edit" : "Add song"))

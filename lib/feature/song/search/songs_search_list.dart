@@ -4,7 +4,6 @@ import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_bloc.dart';
 import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_event.dart';
 import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_state.dart';
 import 'package:flutter_bloc_lyrics/feature/song/details/song_details_screen.dart';
-import 'package:flutter_bloc_lyrics/model/api/song_result.dart';
 import 'package:flutter_bloc_lyrics/model/song_base.dart';
 
 class SongsSearchList extends StatelessWidget {
@@ -60,22 +59,29 @@ class _SongSearchResultItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return song.lyricsURL != null ? _getSongDetailsLayout(context) :
-        Dismissible(
-          background: Container(color: Colors.red,),
-            onDismissed: (direction){
-              BlocProvider.of<SongsSearchBloc>(context).dispatch(RemoveSong(songID: song.id));
+    return song.lyricsURL != null
+        ? _getSongDetailsLayout(context)
+        : Dismissible(
+            background: Container(
+              color: Colors.red,
+            ),
+            onDismissed: (direction) {
+              BlocProvider.of<SongsSearchBloc>(context)
+                  .dispatch(RemoveSong(songID: song.id));
             },
-            key: Key(UniqueKey().toString()), child: _getSongDetailsLayout(context));
+            key: Key(UniqueKey().toString()),
+            child: _getSongDetailsLayout(context));
   }
 
-  Padding _getSongDetailsLayout(BuildContext context){
+  Padding _getSongDetailsLayout(BuildContext context) {
     return Padding(
         padding: EdgeInsets.symmetric(vertical: 8.0),
         child: ListTile(
-          leading: song.albumThumbnail == null ? Icon(Icons.sd_card) : Image.network(
-            song.albumThumbnail,
-          ),
+          leading: song.albumThumbnail == null
+              ? Icon(Icons.sd_card)
+              : Image.network(
+                  song.albumThumbnail,
+                ),
           title: Text(song.title),
           onTap: () {
             Navigator.push(
