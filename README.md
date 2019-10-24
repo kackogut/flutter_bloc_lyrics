@@ -1,16 +1,11 @@
-# flutter_bloc
+# Flutter BLoC Lyrics
 
-Flutter BLoC example
+Flutter BLoC example. App created for fetching songs lyrics from [Genius API](https://docs.genius.com/) and add custom song details, that are stored in the device memory.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+To start the application you have to obtain API key from [Genius API] (https://genius.com/api-clients/new), then create file ***secrets.dart*** in ***lib/common***.In this file create variable ***const String GENIUS_KEY = ...*** and paste your token as the value.
 
-A few resources to get you started if this is your first Flutter project:
+## Helpful links
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[Bloc library](https://felangel.github.io/bloc/#/)
