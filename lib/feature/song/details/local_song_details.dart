@@ -14,16 +14,7 @@ class LocalSongDetails extends StatelessWidget {
         title: Text("Song details"),
       ),
       body: _getScreenBody(context),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => SongAddScreen(song: song)));
-        },
-        tooltip: "Edit",
-        child: Icon(Icons.edit),
-      ),
+      floatingActionButton: _getFloatingButton(context),
     );
   }
 
@@ -55,4 +46,16 @@ class LocalSongDetails extends StatelessWidget {
           )
         ],
       )));
+
+  FloatingActionButton _getFloatingButton(BuildContext context) =>
+      FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SongAddScreen(song: song)));
+        },
+        tooltip: "Edit",
+        child: Icon(Icons.edit),
+      );
 }

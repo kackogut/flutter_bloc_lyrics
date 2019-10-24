@@ -13,9 +13,7 @@ class SongDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return song.lyricsURL == null
-        ? LocalSongDetails(
-            song: song,
-          )
+        ? LocalSongDetails(song: song)
         : WebSongDetails(songDetailsURL: song.lyricsURL);
   }
 }

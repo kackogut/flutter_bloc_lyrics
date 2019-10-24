@@ -1,12 +1,8 @@
-import 'package:flutter_bloc_lyrics/model/api/search_result.dart';
-import 'package:flutter_bloc_lyrics/model/api/song_result.dart';
 import 'package:flutter_bloc_lyrics/model/song_base.dart';
 import 'package:flutter_bloc_lyrics/repository/local_client.dart';
-
 import 'package:flutter_bloc_lyrics/repository/lyrics_client.dart';
 
 class LyricsRepository {
-
   final LyricsClient client;
   final LocalClient localClient;
 
@@ -15,7 +11,7 @@ class LyricsRepository {
   Future<List<SongBase>> searchSongs(String query) async {
     final resultAPI = await client.searchSongs(query);
     final resultLocal = await localClient.getSongs(query);
-    resultLocal.addAll(resultAPI.songs.map((song)=> song.songResultItem));
+    resultLocal.addAll(resultAPI.songs.map((song) => song.songResultItem));
     return resultLocal;
   }
 
@@ -23,11 +19,11 @@ class LyricsRepository {
     await localClient.removeSong(songIndex);
   }
 
-  Future<SongBase> addSong(SongBase song) async{
+  Future<SongBase> addSong(SongBase song) async {
     return await localClient.addSong(song);
   }
 
-  Future<SongBase> editSong(SongBase song) async{
+  Future<SongBase> editSong(SongBase song) async {
     return await localClient.editSong(song);
   }
 }

@@ -1,0 +1,1 @@
+const int DEFAULT_SEARCH_DEBOUNCE = 500;

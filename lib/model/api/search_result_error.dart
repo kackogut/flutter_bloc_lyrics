@@ -4,9 +4,7 @@ class SearchResultError {
   const SearchResultError({this.message});
 
   static SearchResultError fromJson(dynamic json) {
-    return SearchResultError(
-      message: json['message'] as String
-    );
+    return SearchResultError(message: json['message'] as String);
   }
 }
 
@@ -15,9 +13,8 @@ class MetaResponse {
 
   const MetaResponse({this.searchResultError});
 
-  static MetaResponse fromJson(dynamic json){
+  static MetaResponse fromJson(dynamic json) {
     return MetaResponse(
-      searchResultError: SearchResultError.fromJson(json['meta'])
-    );
+        searchResultError: SearchResultError.fromJson(json['meta']));
   }
 }

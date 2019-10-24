@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc_lyrics/common/constants.dart';
 import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_event.dart';
 import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_state.dart';
 import 'package:flutter_bloc_lyrics/model/api/search_result_error.dart';
@@ -22,7 +23,7 @@ class SongsSearchBloc extends Bloc<SongEvent, SongsSearchState> {
       Stream<SongsSearchState> Function(SongEvent event) next) {
     return super.transformEvents(
       (events as Observable<SongEvent>).debounceTime(
-        Duration(milliseconds: 500),
+        Duration(milliseconds: DEFAULT_SEARCH_DEBOUNCE),
       ),
       next,
     );
