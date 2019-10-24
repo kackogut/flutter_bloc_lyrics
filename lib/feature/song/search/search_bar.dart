@@ -23,7 +23,7 @@ class _SearchBarState extends State<SearchBar> {
     return TextField(
       controller: _songSearchController,
       onChanged: (text) {
-        _songSearchBloc.dispatch(TextChanged(query: text));
+        _songSearchBloc.add(TextChanged(query: text));
       },
       decoration: InputDecoration(
           prefixIcon: Icon(Icons.search), hintText: "Search lyrics"),

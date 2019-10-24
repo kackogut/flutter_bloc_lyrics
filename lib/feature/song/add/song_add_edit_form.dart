@@ -87,7 +87,7 @@ class SongAddState extends State<SongAddForm> {
                                     title: _title,
                                     lyrics: _lyrics,
                                     artist: _artist);
-                                _songSearchBloc.dispatch(_song == null
+                                _songSearchBloc.add(_song == null
                                     ? AddSong(song: updatedSong)
                                     : EditSong(song: updatedSong));
                               }

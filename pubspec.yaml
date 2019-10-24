@@ -10,8 +10,8 @@ dependencies:
   meta: ^1.1.6
   equatable: ^0.2.0
   http: ^0.12.0
-  bloc: ^0.15.0
-  flutter_bloc: ^0.21.0
+  bloc: ^1.0.0
+  flutter_bloc: ^1.0.0
   flutter_webview_plugin: ^0.3.7
   flutter:
     sdk: flutter

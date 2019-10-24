@@ -67,7 +67,7 @@ class _SongSearchResultItem extends StatelessWidget {
             ),
             onDismissed: (direction) {
               BlocProvider.of<SongsSearchBloc>(context)
-                  .dispatch(RemoveSong(songID: song.id));
+                  .add(RemoveSong(songID: song.id));
             },
             key: Key(UniqueKey().toString()),
             child: _getSongDetailsLayout(context));

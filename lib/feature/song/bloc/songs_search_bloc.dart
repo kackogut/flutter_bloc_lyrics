@@ -66,16 +66,16 @@ class SongsSearchBloc extends Bloc<SongEvent, SongsSearchState> {
 
   Stream<SongsSearchState> _mapSongAddToState(AddSong event) async* {
     SongBase updatedSong = await lyricsRepository.addSong(event.song);
-    if (currentState is SearchStateSuccess) {
-      SearchStateSuccess state = currentState;
-      List<SongBase> updatedList = (currentState as SearchStateSuccess).songs;
+    if (state is SearchStateSuccess) {
+      SearchStateSuccess searchState = state;
+      List<SongBase> updatedList = (state as SearchStateSuccess).songs;
 
       yield AddEditSongStateSuccess();
 
-      if (updatedSong.isInQuery(state.query)) {
+      if (updatedSong.isInQuery(searchState.query)) {
         updatedList..insert(0, updatedSong);
       }
-      yield SearchStateSuccess(updatedList, state.query);
+      yield SearchStateSuccess(updatedList, searchState.query);
     } else {
       yield AddEditSongStateSuccess();
     }
@@ -87,19 +87,18 @@ class SongsSearchBloc extends Bloc<SongEvent, SongsSearchState> {
 
   Stream<SongsSearchState> _mapSongEditToState(EditSong event) async* {
     SongBase updatedSong = await lyricsRepository.editSong(event.song);
-    if (currentState is SearchStateSuccess) {
+    if (state is SearchStateSuccess) {
       yield EditSongStateSuccess(updatedSong);
-      SearchStateSuccess state = currentState;
-      List<SongBase> updatedList =
-          (currentState as SearchStateSuccess).songs;
-      if (updatedSong.isInQuery(state.query)) {
+      SearchStateSuccess searchState = state;
+      List<SongBase> updatedList = searchState.songs;
+      if (updatedSong.isInQuery(searchState.query)) {
         updatedList = updatedList.map((song) {
           return song.id == updatedSong.id ? updatedSong : song;
         }).toList();
       } else {
         updatedList.removeWhere((song)=> song.id == updatedSong.id);
       }
-      yield SearchStateSuccess(updatedList, state.query);
+      yield SearchStateSuccess(updatedList, searchState.query);
     } else {
       yield EditSongStateSuccess(updatedSong);
     }

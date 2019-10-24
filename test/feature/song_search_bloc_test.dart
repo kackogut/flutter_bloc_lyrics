@@ -17,9 +17,9 @@ void main(){
     songsSearchBloc = SongsSearchBloc(lyricsRepository: lyricsRepository);
   });
 
-//  tearDown((){
-//    songsSearchBloc?.close();
-//  })
+  tearDown((){
+    songsSearchBloc?.close();
+  });
 
   test('initial state is correct', (){
     expect(SearchStateEmpty(), songsSearchBloc.initialState);
