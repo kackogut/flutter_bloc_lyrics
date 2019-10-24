@@ -12,8 +12,8 @@ class SongsSearchList extends StatelessWidget {
     return BlocBuilder<SongsSearchBloc, SongsSearchState>(
       bloc: BlocProvider.of<SongsSearchBloc>(context),
       builder: (BuildContext context, SongsSearchState state) {
-        if (state is SearchStateEmpty) {
-          return Text('Enter song title');
+        if (state is SearchStateLoading) {
+          return Center(child: CircularProgressIndicator());
         }
         if (state is SearchStateError) {
           return Text(state.error);
@@ -27,7 +27,7 @@ class SongsSearchList extends StatelessWidget {
                   ),
                 );
         } else {
-          return Center(child: CircularProgressIndicator());
+          return Text('Enter song title');
         }
       },
     );
