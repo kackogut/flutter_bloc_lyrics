@@ -83,6 +83,13 @@ class SongsSearchBloc extends Bloc<SongEvent, SongsSearchState> {
 
   Stream<SongsSearchState> _mapSongRemoveToState(RemoveSong event) async* {
     await lyricsRepository.removeSong(event.songID);
+    if(state is SearchStateSuccess){
+      SearchStateSuccess searchState = state;
+      searchState.songs.removeWhere((song){
+        return song.id == event.songID;
+      });
+      yield SearchStateSuccess(searchState.songs, searchState.query);
+    }
   }
 
   Stream<SongsSearchState> _mapSongEditToState(EditSong event) async* {
