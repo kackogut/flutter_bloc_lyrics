@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_lyrics/feature/song/search/search_screen.dart';
+import 'package:flutter_bloc_lyrics/feature/song/search/ui/search_screen.dart';
 import 'package:flutter_bloc_lyrics/repository/local_client.dart';
 import 'package:flutter_bloc_lyrics/repository/lyrics_client.dart';
 import 'package:flutter_bloc_lyrics/repository/lyrics_repository.dart';
 
-import 'feature/song/bloc/songs_search_bloc.dart';
+import 'feature/song/search/bloc/songs_search_bloc.dart';
+
 
 void main() {
   final LyricsRepository _lyricsRepository =

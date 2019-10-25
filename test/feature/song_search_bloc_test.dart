@@ -1,6 +1,4 @@
-import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_bloc.dart';
-import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_event.dart';
-import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_state.dart';
+import 'package:flutter_bloc_lyrics/feature/song/search/bloc/songs_search.dart';
 import 'package:flutter_bloc_lyrics/model/song_base.dart';
 import 'package:flutter_bloc_lyrics/repository/lyrics_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,6 +11,9 @@ class MockSongBase extends Mock implements SongBase {}
 void main() {
   SongsSearchBloc songsSearchBloc;
   MockLyricsRepository lyricsRepository;
+
+  String query = "query.test";
+  List<SongBase> songsList = List();
 
   setUp(() {
     lyricsRepository = MockLyricsRepository();
@@ -34,8 +35,7 @@ void main() {
   });
 
   test('emits success state after insering lyrics search query', () {
-    String query = "query.test";
-    List<SongBase> songsList = List();
+
     songsList.add(MockSongBase());
 
     final expectedResponse = [
@@ -50,5 +50,9 @@ void main() {
     expectLater(songsSearchBloc, emitsInOrder(expectedResponse));
 
     songsSearchBloc.add(TextChanged(query: query));
+  });
+
+  test('emits state success with new song, after adding it locally and song is in query',(){
+    //TODO:Add
   });
 }

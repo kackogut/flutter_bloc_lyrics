@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_lyrics/feature/song/add/song_add_edit_screen.dart';
-import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_bloc.dart';
-import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_state.dart';
+import 'package:flutter_bloc_lyrics/feature/song/search/bloc/songs_search_bloc.dart';
+import 'package:flutter_bloc_lyrics/feature/song/search/bloc/songs_search_state.dart';
 import 'package:flutter_bloc_lyrics/model/song_base.dart';
 
 class LocalSongDetails extends StatefulWidget {
@@ -34,7 +34,8 @@ class LocalSongDetailsState extends State<LocalSongDetails> {
     return BlocListener<SongsSearchBloc, SongsSearchState>(
         bloc: _songSearchBloc,
         listener: (context, state) {
-          if (state is EditSongStateSuccess) {
+          if (state
+          is EditSongStateSuccess) {
             setState(() {
               song = state.song;
             });

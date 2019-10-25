@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_bloc.dart';
-import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_event.dart';
+import 'package:flutter_bloc_lyrics/feature/song/search/bloc/songs_search.dart';
 
 class SearchBar extends StatefulWidget {
   @override

@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc_lyrics/common/constants.dart';
-import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_event.dart';
-import 'package:flutter_bloc_lyrics/feature/song/bloc/songs_search_state.dart';
+import 'package:flutter_bloc_lyrics/feature/song/search/bloc/songs_search_event.dart';
+import 'package:flutter_bloc_lyrics/feature/song/search/bloc/songs_search_state.dart';
 import 'package:flutter_bloc_lyrics/model/api/search_result_error.dart';
 import 'package:flutter_bloc_lyrics/model/song_base.dart';
 import 'package:flutter_bloc_lyrics/repository/lyrics_repository.dart';
