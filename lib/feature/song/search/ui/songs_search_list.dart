@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_lyrics/feature/song/details/song_details_screen.dart';
 import 'package:flutter_bloc_lyrics/feature/song/search/bloc/songs_search.dart';
 import 'package:flutter_bloc_lyrics/model/song_base.dart';
+import 'package:flutter_bloc_lyrics/resources/langs/strings.dart';
 
 class SongsSearchList extends StatelessWidget {
   @override
@@ -18,14 +20,14 @@ class SongsSearchList extends StatelessWidget {
         }
         if (state is SearchStateSuccess) {
           return state.songs.isEmpty
-              ? Text("No items")
+              ? Text(AppLocalizations.of(context).tr(S.EMPTY_LIST))
               : Expanded(
                   child: _SongsSearchResults(
                     songsList: state.songs,
                   ),
                 );
         } else {
-          return Text('Enter song title');
+          return Text(AppLocalizations.of(context).tr(S.ENTER_SONG_TITLE));
         }
       },
     );

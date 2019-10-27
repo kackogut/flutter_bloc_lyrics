@@ -37,10 +37,7 @@ class SongAddState extends State<SongAddForm> {
 
   @override
   Widget build(BuildContext context) {
-    var data = EasyLocalizationProvider.of(context).data;
-    return EasyLocalizationProvider(
-      data: data,
-      child: BlocListener<SongsSearchBloc, SongsSearchState>(
+    return BlocListener<SongsSearchBloc, SongsSearchState>(
         bloc: _songSearchBloc,
         listener: (context, state) {
           if (state is AddEditSongStateSuccess || state is EditSongStateSuccess) {
@@ -63,7 +60,7 @@ class SongAddState extends State<SongAddForm> {
                     ),
                     TextFormField(
                       initialValue: _song != null ? _song.artist : "",
-                      decoration: InputDecoration(hintText: "Artist"),
+                      decoration: InputDecoration(hintText: AppLocalizations.of(context).tr(S.ARTIST)),
                       onSaved: (value) => _artist = value,
                       validator: (val) {
                         return val.trim().isEmpty ? S.EMPTY_ARTIST : null;
@@ -71,7 +68,7 @@ class SongAddState extends State<SongAddForm> {
                     ),
                     TextFormField(
                       initialValue: _song != null ? _song.lyrics : "",
-                      decoration: InputDecoration(hintText: "Lyrics"),
+                      decoration: InputDecoration(hintText: AppLocalizations.of(context).tr(S.LYRICS)),
                       onSaved: (value) => _lyrics = value,
                       validator: (val) {
                         return val.trim().isEmpty ? S.EMPTY_LYRICS : null;
@@ -97,6 +94,6 @@ class SongAddState extends State<SongAddForm> {
                             },
                             text: _song != null ? "Edit" : "Add song"))
                   ],
-                )))));
+                ))));
   }
 }

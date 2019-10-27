@@ -1,8 +1,12 @@
 {
   "labels": {
-    "title": "title",
-    "artist": "artist",
-    "lyrics": "lyrics"
+    "title": "Title",
+    "artist": "Artist",
+    "lyrics": "Lyrics",
+    "add_song": "Add song",
+    "song_details": "Song details",
+    "enter_song_title": "Enter song title",
+    "empty_list": "Empty list"
   },
   "errors": {
     "empty_title": "Empty title",

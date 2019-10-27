@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc_lyrics/resources/langs/strings.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 class WebSongDetails extends StatelessWidget {
@@ -11,7 +12,7 @@ class WebSongDetails extends StatelessWidget {
     return WebviewScaffold(
       url: songDetailsURL,
       appBar: AppBar(
-        title: Text("Song lyrics"),
+        title: Text(S.SONG_LYRICS),
       ),
     );
   }
