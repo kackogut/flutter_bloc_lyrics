@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_lyrics/feature/song/search/bloc/songs_search.dart';
 import 'package:flutter_bloc_lyrics/model/song_base.dart';
+import 'package:flutter_bloc_lyrics/resources/langs/strings.dart';
 import 'package:flutter_bloc_lyrics/widgets/buttons.dart';
 
 class SongAddForm extends StatefulWidget {
@@ -35,7 +37,10 @@ class SongAddState extends State<SongAddForm> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<SongsSearchBloc, SongsSearchState>(
+    var data = EasyLocalizationProvider.of(context).data;
+    return EasyLocalizationProvider(
+      data: data,
+      child: BlocListener<SongsSearchBloc, SongsSearchState>(
         bloc: _songSearchBloc,
         listener: (context, state) {
           if (state is AddEditSongStateSuccess || state is EditSongStateSuccess) {
@@ -50,10 +55,10 @@ class SongAddState extends State<SongAddForm> {
                   children: <Widget>[
                     TextFormField(
                       initialValue: _song != null ? _song.title : "",
-                      decoration: InputDecoration(hintText: "Title"),
+                      decoration: InputDecoration(hintText: AppLocalizations.of(context).tr(S.TITLE)),
                       onSaved: (value) => _title = value,
                       validator: (val) {
-                        return val.trim().isEmpty ? "Empty title" : null;
+                        return val.trim().isEmpty ? S.EMPTY_TITLE : null;
                       },
                     ),
                     TextFormField(
@@ -61,7 +66,7 @@ class SongAddState extends State<SongAddForm> {
                       decoration: InputDecoration(hintText: "Artist"),
                       onSaved: (value) => _artist = value,
                       validator: (val) {
-                        return val.trim().isEmpty ? "Empty Artist" : null;
+                        return val.trim().isEmpty ? S.EMPTY_ARTIST : null;
                       },
                     ),
                     TextFormField(
@@ -69,7 +74,7 @@ class SongAddState extends State<SongAddForm> {
                       decoration: InputDecoration(hintText: "Lyrics"),
                       onSaved: (value) => _lyrics = value,
                       validator: (val) {
-                        return val.trim().isEmpty ? "Empty lyrics" : null;
+                        return val.trim().isEmpty ? S.EMPTY_LYRICS : null;
                       },
                       minLines: 15,
                       maxLines: 15,
@@ -92,6 +97,6 @@ class SongAddState extends State<SongAddForm> {
                             },
                             text: _song != null ? "Edit" : "Add song"))
                   ],
-                ))));
+                )))));
   }
 }

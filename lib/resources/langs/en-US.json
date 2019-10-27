@@ -1,0 +1,12 @@
+{
+  "labels": {
+    "title": "title",
+    "artist": "artist",
+    "lyrics": "lyrics"
+  },
+  "errors": {
+    "empty_title": "Empty title",
+    "empty_artist": "Empty artist",
+    "empty_lyrics": "Empty lyrics"
+  }
+}
