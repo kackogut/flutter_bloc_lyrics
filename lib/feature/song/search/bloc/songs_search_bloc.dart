@@ -2,18 +2,31 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc_lyrics/common/constants.dart';
+import 'package:flutter_bloc_lyrics/feature/song/add/bloc/song_add_edit.dart';
 import 'package:flutter_bloc_lyrics/feature/song/search/bloc/songs_search_event.dart';
 import 'package:flutter_bloc_lyrics/feature/song/search/bloc/songs_search_state.dart';
 import 'package:flutter_bloc_lyrics/model/api/search_result_error.dart';
-import 'package:flutter_bloc_lyrics/model/song_base.dart';
 import 'package:flutter_bloc_lyrics/repository/lyrics_repository.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
 class SongsSearchBloc extends Bloc<SongSearchEvent, SongsSearchState> {
   final LyricsRepository lyricsRepository;
+  final SongAddEditBloc songAddEditBloc;
 
-  SongsSearchBloc({@required this.lyricsRepository});
+  StreamSubscription addEditBlocSubscription;
+
+  SongsSearchBloc(
+      {@required this.lyricsRepository, @required this.songAddEditBloc}) {
+    songAddEditBloc.listen((songAddEditState) {
+      if(state is SearchStateSuccess) {
+        SearchStateSuccess searchStateSuccess = state;
+        if(songAddEditState is EditSongStateSuccess || songAddEditState is AddSongStateSuccess){
+          add(TextChanged(query: searchStateSuccess.query));
+        }
+      }
+    });
+  }
 
   @override
   SongsSearchState get initialState => SearchStateEmpty();
@@ -60,9 +73,9 @@ class SongsSearchBloc extends Bloc<SongSearchEvent, SongsSearchState> {
 
   Stream<SongsSearchState> _mapSongRemoveToState(RemoveSong event) async* {
     await lyricsRepository.removeSong(event.songID);
-    if(state is SearchStateSuccess){
+    if (state is SearchStateSuccess) {
       SearchStateSuccess searchState = state;
-      searchState.songs.removeWhere((song){
+      searchState.songs.removeWhere((song) {
         return song.id == event.songID;
       });
       yield SearchStateSuccess(searchState.songs, searchState.query);
@@ -72,5 +85,11 @@ class SongsSearchBloc extends Bloc<SongSearchEvent, SongsSearchState> {
   @override
   void onTransition(Transition<SongSearchEvent, SongsSearchState> transition) {
     print(transition);
+  }
+
+  @override
+  void close() {
+    addEditBlocSubscription.cancel();
+    super.close();
   }
 }

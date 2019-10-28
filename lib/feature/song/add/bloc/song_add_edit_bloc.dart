@@ -26,8 +26,9 @@ class SongAddEditBloc extends Bloc<SongAddEditEvent, SongAddEditState> {
   }
 
   Stream<SongAddEditState> _mapSongAddToState(AddSong event) async* {
+    yield StateLoading();
     SongBase updatedSong = await lyricsRepository.addSong(event.song);
-    yield AddSongStateSuccess();
+    yield AddSongStateSuccess(updatedSong);
 //    if (state is SearchStateSuccess) {
 //      SearchStateSuccess searchState = state;
 //      List<SongBase> updatedList = (state as SearchStateSuccess).songs;
@@ -45,8 +46,10 @@ class SongAddEditBloc extends Bloc<SongAddEditEvent, SongAddEditState> {
 
 
   Stream<SongAddEditState> _mapSongEditToState(EditSong event) async* {
+    yield StateLoading();
     SongBase updatedSong = await lyricsRepository.editSong(event.song);
     yield EditSongStateSuccess(updatedSong);
+
 //    if (state is SearchStateSuccess) {
 //      yield EditSongStateSuccess(updatedSong);
 //      SearchStateSuccess searchState = state;

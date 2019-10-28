@@ -31,14 +31,15 @@ class LyricsApp extends StatelessWidget {
       data: data,
       child: MultiBlocProvider(
         providers: [
-          BlocProvider<SongsSearchBloc>(
-            builder: (context) =>
-                SongsSearchBloc(lyricsRepository: lyricsRepository),
-          ),
           BlocProvider<SongAddEditBloc>(
             builder: (context) =>
                 SongAddEditBloc(lyricsRepository: lyricsRepository),
-          )
+          ),
+          BlocProvider<SongsSearchBloc>(
+            builder: (context) =>
+                SongsSearchBloc(lyricsRepository: lyricsRepository,
+                songAddEditBloc: BlocProvider.of<SongAddEditBloc>(context)),
+          ),
         ],
           child: MaterialApp(
               localizationsDelegates: [

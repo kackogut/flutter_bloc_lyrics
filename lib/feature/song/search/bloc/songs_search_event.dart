@@ -22,3 +22,12 @@ class RemoveSong extends SongSearchEvent {
   @override
   String toString() => "Remove song { songID: $songID }";
 }
+
+class UpdateSongs extends SongSearchEvent {
+  final SongBase song;
+
+  UpdateSongs({this.song}):super([song]);
+
+  @override
+  String toString() => "Update song { song: $song }";
+}

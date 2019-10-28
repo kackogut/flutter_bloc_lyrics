@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_lyrics/feature/song/add/bloc/song_add_edit.dart';
 import 'package:flutter_bloc_lyrics/feature/song/add/ui/song_add_edit_screen.dart';
 import 'package:flutter_bloc_lyrics/feature/song/search/bloc/songs_search_bloc.dart';
 import 'package:flutter_bloc_lyrics/feature/song/search/bloc/songs_search_state.dart';
@@ -21,27 +22,27 @@ class LocalSongDetails extends StatefulWidget {
 class LocalSongDetailsState extends State<LocalSongDetails> {
   SongBase song;
 
-  SongsSearchBloc _songSearchBloc;
+  SongAddEditBloc _songAddEditBloc;
 
   LocalSongDetailsState(this.song);
 
   @override
   void initState() {
     super.initState();
-    _songSearchBloc = BlocProvider.of<SongsSearchBloc>(context);
+    _songAddEditBloc = BlocProvider.of<SongAddEditBloc>(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<SongsSearchBloc, SongsSearchState>(
-        bloc: _songSearchBloc,
+    return BlocListener<SongAddEditBloc, SongAddEditState>(
+        bloc: _songAddEditBloc,
         listener: (context, state) {
-//          if (state
-//          is EditSongStateSuccess) {
-//            setState(() {
-//              song = state.song;
-//            });
-//          }
+          if (state
+          is EditSongStateSuccess) {
+            setState(() {
+              song = state.song;
+            });
+          }
         },
         child: Scaffold(
           appBar: AppBar(

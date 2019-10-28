@@ -92,7 +92,7 @@ class SongAddState extends State<SongAddForm> {
                                     : EditSong(song: updatedSong));
                               }
                             },
-                            text: _song != null ? "Edit" : "Add song"))
+                            text: AppLocalizations.of(context).tr(_song != null ? S.EDIT : S.ADD_SONG)))
                   ],
                 ))));
   }

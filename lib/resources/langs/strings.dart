@@ -7,6 +7,7 @@ class S {
   static const String SONG_LYRICS = "labels.song_lyrics";
   static const String SEARCH_LYRICS = "labels.search_lyrics";
   static const String ENTER_SONG_TITLE = "labels.enter_song_title";
+  static const String EDIT = "labels.edit";
 
   static const String EMPTY_TITLE = "errors.empty_title";
   static const String EMPTY_LYRICS = "errors.empty_lyrics";

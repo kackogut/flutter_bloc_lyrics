@@ -16,8 +16,12 @@ class StateLoading extends SongAddEditState {
 }
 
 class AddSongStateSuccess extends SongAddEditState {
+  final SongBase song;
+
+  AddSongStateSuccess(this.song) : super([song]);
+
   @override
-  String toString() => 'AddSongSuccess';
+  String toString() => 'AddSongSuccess {song: $song }';
 }
 
 class EditSongStateSuccess extends SongAddEditState {
