@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc_lyrics/feature/song/add/song_add_edit_screen.dart';
+import 'package:flutter_bloc_lyrics/feature/song/add/ui/song_add_edit_screen.dart';
 import 'package:flutter_bloc_lyrics/feature/song/search/ui/search_bar.dart';
 import 'package:flutter_bloc_lyrics/feature/song/search/ui/songs_search_list.dart';
 
 class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Lyrics App',
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text("Lyrics App"),
         ),
@@ -22,7 +20,6 @@ class SearchScreen extends StatelessWidget {
           },
           child: Icon(Icons.add),
         ),
-      ),
     );
   }
 }

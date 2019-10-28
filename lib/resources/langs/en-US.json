@@ -6,7 +6,8 @@
     "add_song": "Add song",
     "song_details": "Song details",
     "enter_song_title": "Enter song title",
-    "empty_list": "Empty list"
+    "empty_list": "Empty list",
+    "search_lyrics": "Search lyrics"
   },
   "errors": {
     "empty_title": "Empty title",

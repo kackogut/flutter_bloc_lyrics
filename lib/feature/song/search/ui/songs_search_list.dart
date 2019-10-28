@@ -27,7 +27,9 @@ class SongsSearchList extends StatelessWidget {
                   ),
                 );
         } else {
-          return Text(AppLocalizations.of(context).tr(S.ENTER_SONG_TITLE));
+          return Padding(
+              padding: EdgeInsets.only(top: 16.0),
+              child: Text(AppLocalizations.of(context).tr(S.ENTER_SONG_TITLE)));
         }
       },
     );

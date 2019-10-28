@@ -21,7 +21,10 @@ class _SearchBarState extends State<SearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    var data = EasyLocalizationProvider.of(context).data;
+    return EasyLocalizationProvider(
+    data: data,
+     child:TextField(
       controller: _songSearchController,
       onChanged: (text) {
         _songSearchBloc.add(TextChanged(query: text));
@@ -29,7 +32,7 @@ class _SearchBarState extends State<SearchBar> {
       decoration: InputDecoration(
           prefixIcon: Icon(Icons.search),
           hintText: AppLocalizations.of(context).tr(S.SEARCH_LYRICS)),
-    );
+    ));
   }
 
   @override

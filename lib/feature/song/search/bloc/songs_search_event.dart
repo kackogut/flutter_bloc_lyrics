@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc_lyrics/model/song_base.dart';
 
-abstract class SongEvent extends Equatable {
-  SongEvent([List props = const []]) : super(props);
+abstract class SongSearchEvent extends Equatable {
+  SongSearchEvent([List props = const []]) : super(props);
 }
 
-class TextChanged extends SongEvent {
+class TextChanged extends SongSearchEvent {
   final String query;
 
   TextChanged({this.query}) : super([query]);
@@ -14,25 +14,7 @@ class TextChanged extends SongEvent {
   String toString() => "SongSearchTextChanged { query: $query }";
 }
 
-class AddSong extends SongEvent {
-  final SongBase song;
-
-  AddSong({this.song}) : super([song]);
-
-  @override
-  String toString() => "AddSong { song ${song.id}";
-}
-
-class EditSong extends SongEvent {
-  final SongBase song;
-
-  EditSong({this.song}) : super([song]);
-
-  @override
-  String toString() => "EditSong { song ${song.id}";
-}
-
-class RemoveSong extends SongEvent {
+class RemoveSong extends SongSearchEvent {
   final int songID;
 
   RemoveSong({this.songID}) : super([songID]);

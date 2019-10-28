@@ -25,20 +25,6 @@ class SearchStateSuccess extends SongsSearchState {
   String toString() => 'SearchStateSuccess { songs: ${songs.length} }';
 }
 
-class AddEditSongStateSuccess extends SongsSearchState {
-  @override
-  String toString() => 'AddSongSuccess';
-}
-
-class EditSongStateSuccess extends SongsSearchState {
-  final SongBase song;
-
-  EditSongStateSuccess(this.song) : super([song]);
-
-  @override
-  String toString() => 'EditSongSuccess {song: $song }';
-}
-
 class SearchStateError extends SongsSearchState {
   final String error;
 

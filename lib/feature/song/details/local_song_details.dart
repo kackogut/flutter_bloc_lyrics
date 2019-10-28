@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_lyrics/feature/song/add/song_add_edit_screen.dart';
+import 'package:flutter_bloc_lyrics/feature/song/add/ui/song_add_edit_screen.dart';
 import 'package:flutter_bloc_lyrics/feature/song/search/bloc/songs_search_bloc.dart';
 import 'package:flutter_bloc_lyrics/feature/song/search/bloc/songs_search_state.dart';
 import 'package:flutter_bloc_lyrics/model/song_base.dart';
@@ -36,12 +36,12 @@ class LocalSongDetailsState extends State<LocalSongDetails> {
     return BlocListener<SongsSearchBloc, SongsSearchState>(
         bloc: _songSearchBloc,
         listener: (context, state) {
-          if (state
-          is EditSongStateSuccess) {
-            setState(() {
-              song = state.song;
-            });
-          }
+//          if (state
+//          is EditSongStateSuccess) {
+//            setState(() {
+//              song = state.song;
+//            });
+//          }
         },
         child: Scaffold(
           appBar: AppBar(
