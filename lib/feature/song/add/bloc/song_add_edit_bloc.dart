@@ -29,19 +29,6 @@ class SongAddEditBloc extends Bloc<SongAddEditEvent, SongAddEditState> {
     yield StateLoading();
     SongBase updatedSong = await lyricsRepository.addSong(event.song);
     yield AddSongStateSuccess(updatedSong);
-//    if (state is SearchStateSuccess) {
-//      SearchStateSuccess searchState = state;
-//      List<SongBase> updatedList = (state as SearchStateSuccess).songs;
-//
-//      yield AddSongStateSuccess();
-//
-//      if (updatedSong.isInQuery(searchState.query)) {
-//        updatedList..insert(0, updatedSong);
-//      }
-//      yield SearchStateSuccess(updatedList, searchState.query);
-//    } else {
-//
-//    }
   }
 
 
@@ -49,22 +36,6 @@ class SongAddEditBloc extends Bloc<SongAddEditEvent, SongAddEditState> {
     yield StateLoading();
     SongBase updatedSong = await lyricsRepository.editSong(event.song);
     yield EditSongStateSuccess(updatedSong);
-
-//    if (state is SearchStateSuccess) {
-//      yield EditSongStateSuccess(updatedSong);
-//      SearchStateSuccess searchState = state;
-//      List<SongBase> updatedList = searchState.songs;
-//      if (updatedSong.isInQuery(searchState.query)) {
-//        updatedList = updatedList.map((song) {
-//          return song.id == updatedSong.id ? updatedSong : song;
-//        }).toList();
-//      } else {
-//        updatedList.removeWhere((song)=> song.id == updatedSong.id);
-//      }
-//      yield SearchStateSuccess(updatedList, searchState.query);
-//    } else {
-//
-//    }
   }
 
   @override
