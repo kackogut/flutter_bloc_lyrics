@@ -8,7 +8,9 @@
     "enter_song_title": "Enter song title",
     "empty_list": "Empty list",
     "search_lyrics": "Search lyrics",
-    "edit": "Edit"
+    "edit": "Edit",
+    "edit_song": "Edit song",
+    "song_lyrics": "Song lyrics"
   },
   "errors": {
     "empty_title": "Empty title",

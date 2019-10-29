@@ -63,14 +63,14 @@ class LocalSongDetailsState extends State<LocalSongDetails> {
           ),
           Text(
             song.artist,
-            style: Theme.of(context).textTheme.title,
+            style: Theme.of(context).textTheme.subtitle,
           ),
           Padding(
             padding: EdgeInsets.only(top: 8.0),
           ),
           Text(
             song.title,
-            style: Theme.of(context).textTheme.headline,
+            style: Theme.of(context).textTheme.title,
           ),
           Padding(
             padding: EdgeInsets.only(top: 16.0),
