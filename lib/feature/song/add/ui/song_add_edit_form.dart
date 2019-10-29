@@ -73,11 +73,12 @@ class SongAddState extends State<SongAddForm> {
                       validator: (val) {
                         return val.trim().isEmpty ? S.EMPTY_LYRICS : null;
                       },
-                      minLines: 15,
-                      maxLines: 15,
+                      minLines: 5,
+                      maxLines: 20,
                     ),
+                    Spacer(),
                     Padding(
-                        padding: EdgeInsets.only(top: 16.0),
+                        padding: EdgeInsets.only(bottom: 16.0),
                         child: getBaseButton(
                             onPressed: () {
                               if (_formKey.currentState.validate()) {

@@ -13,7 +13,9 @@ class SongsSearchList extends StatelessWidget {
       bloc: BlocProvider.of<SongsSearchBloc>(context),
       builder: (BuildContext context, SongsSearchState state) {
         if (state is SearchStateLoading) {
-          return Center(child: CircularProgressIndicator());
+          return Padding(
+              padding: EdgeInsets.only(top: 16.0),
+              child:Center(child: CircularProgressIndicator()));
         }
         if (state is SearchStateError) {
           return Text(state.error);

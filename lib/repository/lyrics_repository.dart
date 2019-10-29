@@ -20,7 +20,7 @@ class LyricsRepository {
   }
 
   Future<SongBase> addSong(SongBase song) async {
-    return await localClient.addSong(song);
+    return localClient.addSong(song);
   }
 
   Future<SongBase> editSong(SongBase song) async {
