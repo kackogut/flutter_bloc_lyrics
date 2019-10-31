@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_lyrics/feature/song/add/bloc/song_add_edit.dart';
-import 'package:flutter_bloc_lyrics/feature/song/add/ui/song_add_edit_screen.dart';
+import 'package:flutter_bloc_lyrics/feature/song/add_edit/bloc/song_add_edit.dart';
+import 'package:flutter_bloc_lyrics/feature/song/add_edit/ui/song_add_edit_screen.dart';
 import 'package:flutter_bloc_lyrics/feature/song/search/bloc/songs_search_bloc.dart';
 import 'package:flutter_bloc_lyrics/feature/song/search/bloc/songs_search_state.dart';
 import 'package:flutter_bloc_lyrics/model/song_base.dart';

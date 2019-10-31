@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_lyrics/feature/song/add/bloc/song_add_edit.dart';
+import 'package:flutter_bloc_lyrics/feature/song/add_edit/bloc/song_add_edit.dart';
 import 'package:flutter_bloc_lyrics/feature/song/search/ui/search_screen.dart';
 import 'package:flutter_bloc_lyrics/repository/local_client.dart';
 import 'package:flutter_bloc_lyrics/repository/lyrics_client.dart';

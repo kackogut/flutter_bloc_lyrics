@@ -15,7 +15,8 @@ class SongBase {
       this.id});
 
   bool isInQuery(String query) {
-    return title.toLowerCase().contains(query.toLowerCase());
+    return (title.toLowerCase().contains(query.toLowerCase()) ||
+        artist.toLowerCase().contains(query.toLowerCase()));
   }
 
   SongBase copyWith({title, artist, lyrics, lyricsURL, albumThumbnail, id}) =>

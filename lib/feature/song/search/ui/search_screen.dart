@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc_lyrics/feature/song/add/ui/song_add_edit_screen.dart';
+import 'package:flutter_bloc_lyrics/feature/song/add_edit/ui/song_add_edit_screen.dart';
 import 'package:flutter_bloc_lyrics/feature/song/search/ui/search_bar.dart';
 import 'package:flutter_bloc_lyrics/feature/song/search/ui/songs_search_list.dart';
 
