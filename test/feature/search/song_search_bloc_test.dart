@@ -9,18 +9,28 @@ class MockLyricsRepository extends Mock implements LyricsRepository {}
 
 class MockSongBase extends Mock implements SongBase {}
 
+class MockAddEditBloc extends Mock implements SongAddEditBloc {}
+
 void main() {
   SongAddEditBloc songAddEditBloc;
   SongsSearchBloc songsSearchBloc;
   MockLyricsRepository lyricsRepository;
 
   String query = "query.test";
-  List<SongBase> songsList = List();
+  List<SongBase> songsList = List<SongBase>();
+  int songToRemoveID = 1;
 
   setUp(() {
     lyricsRepository = MockLyricsRepository();
     songAddEditBloc = SongAddEditBloc(lyricsRepository: lyricsRepository);
     songsSearchBloc = SongsSearchBloc(lyricsRepository: lyricsRepository, songAddEditBloc: songAddEditBloc);
+
+    when(lyricsRepository.searchSongs(query))
+        .thenAnswer((_) => Future.value(songsList));
+
+    SongBase song = MockSongBase();
+    when(song.id).thenAnswer((_){return songToRemoveID;});
+    songsList.add(song);
   });
 
   tearDown(() {
@@ -38,33 +48,40 @@ void main() {
     songsSearchBloc.close();
   });
 
-  test('emits success state after insering lyrics search query', () {
+  group('sad', (){
+    void fetchList(){
+      final expectedResponse = [
+        SearchStateEmpty(),
+        SearchStateLoading(),
+        SearchStateSuccess(songsList, query),
+      ];
 
-    songsList.add(MockSongBase());
+      expectLater(songsSearchBloc, emitsInOrder(expectedResponse));
 
-    final expectedResponse = [
-      SearchStateEmpty(),
-      SearchStateLoading(),
-      SearchStateSuccess(songsList, query)
-    ];
+      songsSearchBloc.add(TextChanged(query: query));
+    }
 
-    when(lyricsRepository.searchSongs(query))
-        .thenAnswer((_) => Future.value(songsList));
+    test('emits success state after insering lyrics search query', () async {
+      fetchList();
+    });
 
-    expectLater(songsSearchBloc, emitsInOrder(expectedResponse));
+    test('emits state success with new song, after adding it in addEditBloc and song is in query',(){
+      //TODO:Add
+    });
 
-    songsSearchBloc.add(TextChanged(query: query));
+    test('emits update state with updated song, after updating it in addEditBloc and song is in query',(){
+      //TODO:Add
+    });
+
+    test('removes song from repository when remove event is sent',() async {
+      fetchList();
+
+      await Future.delayed(const Duration(seconds: 1), (){});
+      expectLater(songsSearchBloc, emitsInOrder(
+          [SearchStateSuccess(songsList, query)]));
+      songsSearchBloc.add(RemoveSong(songID: songToRemoveID));
+    });
   });
 
-  test('emits state success with new song, after adding it in addEditBloc and song is in query',(){
-    //TODO:Add
-  });
 
-  test('emits update state with updated song, after updating it in addEditBloc and song is in query',(){
-    //TODO:Add
-  });
-
-  test('removes song from repository when remove event is sent',(){
-    //TODO:Add
-  });
 }

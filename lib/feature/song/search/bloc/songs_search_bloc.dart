@@ -107,10 +107,12 @@ class SongsSearchBloc extends Bloc<SongSearchEvent, SongsSearchState> {
   Stream<SongsSearchState> _mapSongAddedToState(SongAdded event) async* {
     if (state is SearchStateSuccess) {
       SearchStateSuccess successState = state;
-      List<SongBase> updatedList = List.from(successState.songs);
+      List<SongBase> updatedList = successState.songs.map((song){
+        return song.copyWith();
+      });
 
       if (event.song.isInQuery(successState.query)) {
-        updatedList..insert(0, event.song);
+        updatedList.insert(0, event.song);
         yield SearchStateSuccess(updatedList, successState.query);
       }
     }
