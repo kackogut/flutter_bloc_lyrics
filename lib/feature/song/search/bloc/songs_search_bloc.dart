@@ -122,8 +122,8 @@ class SongsSearchBloc extends Bloc<SongSearchEvent, SongsSearchState> {
   }
 
   @override
-  void close() {
+  Future<void> close() {
     addEditBlocSubscription.cancel();
-    super.close();
+    return super.close();
   }
 }
