@@ -80,10 +80,12 @@ void main() {
 
     when(songToAdd.isInQuery(query)).thenAnswer((_){return true;});
 
+    List<SongBase> songList = List.from((songsSearchBloc.state as SearchStateSuccess).songs);
+    songList.insert(0, songToAdd);
     songsSearchBloc.add(SongAdded(song: songToAdd));
     await Future.delayed(const Duration(seconds: 1), () {});
     SearchStateSuccess stateSuccess = songsSearchBloc.state;
-    assert (listEquals(stateSuccess.songs, List.from([songToAdd,songInList])));
+    assert (listEquals(stateSuccess.songs, songList));
   });
 
   test('removes song from repository when remove event is sent', () async {
