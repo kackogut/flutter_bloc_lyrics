@@ -9,3 +9,4 @@ To start the application you have to obtain API key from [Genius API] (https://g
 ## Helpful links
 
 [Bloc library](https://felangel.github.io/bloc/#/)
+[Genius API](https://docs.genius.com/)
