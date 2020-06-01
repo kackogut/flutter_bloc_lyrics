@@ -33,15 +33,20 @@ class SongsSearchBloc extends Bloc<SongSearchEvent, SongsSearchState> {
   @override
   SongsSearchState get initialState => SearchStateEmpty();
 
+
   @override
-  Stream<SongsSearchState> transformEvents(Stream<SongSearchEvent> events,
-      Stream<SongsSearchState> Function(SongSearchEvent event) next) {
-    return super.transformEvents(
-      (events as Observable<SongSearchEvent>).debounceTime(
-        Duration(milliseconds: DEFAULT_SEARCH_DEBOUNCE),
-      ),
-      next,
+  Stream<Transition<SongSearchEvent, SongsSearchState>> transformEvents(Stream<SongSearchEvent> events,
+      TransitionFunction<SongSearchEvent, SongsSearchState> transitionFn) {
+    final nonDebounceStream =
+        events.where((event) => event is! TextChanged);
+
+    final debounceStream =
+    events.where((event) => event is TextChanged).debounceTime(
+      Duration(milliseconds: DEFAULT_SEARCH_DEBOUNCE),
     );
+
+    return super.transformEvents(
+        MergeStream([nonDebounceStream, debounceStream]), transitionFn);
   }
 
   @override

@@ -22,7 +22,7 @@ class SongsSearchList extends StatelessWidget {
         }
         if (state is SearchStateSuccess) {
           return state.songs.isEmpty
-              ? Text(AppLocalizations.of(context).tr(S.EMPTY_LIST))
+              ? Text(S.EMPTY_LIST.tr())
               : Expanded(
                   child: _SongsSearchResults(
                     songsList: state.songs,
@@ -31,7 +31,7 @@ class SongsSearchList extends StatelessWidget {
         } else {
           return Padding(
               padding: EdgeInsets.only(top: 16.0),
-              child: Text(AppLocalizations.of(context).tr(S.ENTER_SONG_TITLE)));
+              child: Text(S.ENTER_SONG_TITLE.tr()));
         }
       },
     );

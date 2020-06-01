@@ -27,8 +27,7 @@ class SongAddScreenState extends State<StatefulWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context)
-              .tr(song?.id == null ? S.ADD_SONG : S.EDIT_SONG)),
+          title: Text(song?.id == null ? S.ADD_SONG : S.EDIT_SONG).tr(),
         ),
         body: BlocBuilder(
             bloc: BlocProvider.of<SongAddEditBloc>(context),
