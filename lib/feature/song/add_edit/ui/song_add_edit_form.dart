@@ -52,7 +52,7 @@ class SongAddState extends State<SongAddForm> {
                   children: <Widget>[
                     TextFormField(
                       initialValue: _song != null ? _song.title : "",
-                      decoration: InputDecoration(hintText: AppLocalizations.of(context).tr(S.TITLE)),
+                      decoration: InputDecoration(hintText: S.TITLE.tr()),
                       onSaved: (value) => _title = value,
                       validator: (val) {
                         return val.trim().isEmpty ? S.EMPTY_TITLE : null;
@@ -60,7 +60,7 @@ class SongAddState extends State<SongAddForm> {
                     ),
                     TextFormField(
                       initialValue: _song != null ? _song.artist : "",
-                      decoration: InputDecoration(hintText: AppLocalizations.of(context).tr(S.ARTIST)),
+                      decoration: InputDecoration(hintText: S.ARTIST.tr()),
                       onSaved: (value) => _artist = value,
                       validator: (val) {
                         return val.trim().isEmpty ? S.EMPTY_ARTIST : null;
@@ -68,7 +68,7 @@ class SongAddState extends State<SongAddForm> {
                     ),
                     TextFormField(
                       initialValue: _song != null ? _song.lyrics : "",
-                      decoration: InputDecoration(hintText: AppLocalizations.of(context).tr(S.LYRICS)),
+                      decoration: InputDecoration(hintText: S.LYRICS.tr()),
                       onSaved: (value) => _lyrics = value,
                       validator: (val) {
                         return val.trim().isEmpty ? S.EMPTY_LYRICS : null;
@@ -93,7 +93,7 @@ class SongAddState extends State<SongAddForm> {
                                     : EditSong(song: updatedSong));
                               }
                             },
-                            text: AppLocalizations.of(context).tr(_song != null ? S.EDIT : S.ADD_SONG)))
+                            text: (_song != null ? S.EDIT : S.ADD_SONG).tr()))
                   ],
                 ))));
   }

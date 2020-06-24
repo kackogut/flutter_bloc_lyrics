@@ -21,18 +21,15 @@ class _SearchBarState extends State<SearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    var data = EasyLocalizationProvider.of(context).data;
-    return EasyLocalizationProvider(
-    data: data,
-     child:TextField(
+    return TextField(
       controller: _songSearchController,
       onChanged: (text) {
         _songSearchBloc.add(TextChanged(query: text));
       },
       decoration: InputDecoration(
           prefixIcon: Icon(Icons.search),
-          hintText: AppLocalizations.of(context).tr(S.SEARCH_LYRICS)),
-    ));
+          hintText: S.SEARCH_LYRICS.tr()),
+    );
   }
 
   @override

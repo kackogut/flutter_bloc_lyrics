@@ -46,7 +46,7 @@ class LocalSongDetailsState extends State<LocalSongDetails> {
         },
         child: Scaffold(
           appBar: AppBar(
-            title: Text(AppLocalizations.of(context).tr(S.SONG_DETAILS)),
+            title: Text(S.SONG_DETAILS).tr(),
           ),
           body: _getScreenBody(context),
           floatingActionButton: _getFloatingButton(context),

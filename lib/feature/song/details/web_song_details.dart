@@ -13,7 +13,7 @@ class WebSongDetails extends StatelessWidget {
     return WebviewScaffold(
       url: songDetailsURL,
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context).tr(S.SONG_LYRICS)),
+        title: Text(S.SONG_LYRICS).tr(),
       ),
     );
   }

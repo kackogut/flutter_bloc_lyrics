@@ -6,16 +6,17 @@ import 'package:flutter_bloc_lyrics/feature/song/search/ui/search_screen.dart';
 import 'package:flutter_bloc_lyrics/repository/local_client.dart';
 import 'package:flutter_bloc_lyrics/repository/lyrics_client.dart';
 import 'package:flutter_bloc_lyrics/repository/lyrics_repository.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'feature/song/search/bloc/songs_search_bloc.dart';
-
 
 void main() {
   final LyricsRepository _lyricsRepository =
       LyricsRepository(LyricsClient(), LocalClient());
 
-  runApp(EasyLocalization(child:LyricsApp(lyricsRepository: _lyricsRepository)));
+  runApp(EasyLocalization(
+      path: 'assets/translations',
+      supportedLocales: [Locale('en', 'US')],
+      child: LyricsApp(lyricsRepository: _lyricsRepository)));
 }
 
 class LyricsApp extends StatelessWidget {
@@ -25,35 +26,23 @@ class LyricsApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var data = EasyLocalizationProvider.of(context).data;
-
-    return EasyLocalizationProvider(
-      data: data,
-      child: MultiBlocProvider(
+    return MultiBlocProvider(
         providers: [
           BlocProvider<SongAddEditBloc>(
-            builder: (context) =>
+            create: (context) =>
                 SongAddEditBloc(lyricsRepository: lyricsRepository),
           ),
           BlocProvider<SongsSearchBloc>(
-            builder: (context) =>
-                SongsSearchBloc(lyricsRepository: lyricsRepository,
+            create: (context) => SongsSearchBloc(
+                lyricsRepository: lyricsRepository,
                 songAddEditBloc: BlocProvider.of<SongAddEditBloc>(context)),
           ),
         ],
-          child: MaterialApp(
-              localizationsDelegates: [
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                EasylocaLizationDelegate(
-                    locale: data.locale,
-                    path: 'lib/resources/langs'),
-              ],
-              supportedLocales: [Locale('en', 'US')],
-              locale: data.savedLocale,
-              theme: ThemeData(primaryColor: Colors.blue),
-              home: SearchScreen()))
-      ,
-    );
-       }
+        child: MaterialApp(
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
+            theme: ThemeData(primaryColor: Colors.blue),
+            home: SearchScreen()));
+  }
 }
