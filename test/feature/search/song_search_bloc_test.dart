@@ -44,7 +44,7 @@ void main() {
   });
 
   test('after initialization bloc state is correct', () {
-    expect(SearchStateEmpty(), songsSearchBloc.initialState);
+    expect(SearchStateEmpty(), songsSearchBloc.state);
   });
 
   test('after closing bloc does not emit any states', () {

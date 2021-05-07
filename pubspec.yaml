@@ -10,7 +10,7 @@ dependencies:
   meta: ^1.1.6
   equatable: ^0.2.0
   http: ^0.12.0
-  flutter_bloc: ^4.0.0
+  flutter_bloc: ^7.0.0
   rxdart: ^0.24.1
   flutter_webview_plugin: ^0.3.7
   easy_localization: ^2.3.2
