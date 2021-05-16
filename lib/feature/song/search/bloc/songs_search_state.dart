@@ -2,7 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc_lyrics/model/song_base.dart';
 
 abstract class SongsSearchState extends Equatable {
-  SongsSearchState([List props = const []]) : super(props);
+  @override
+  List<Object> get props => [];
 }
 
 class SearchStateEmpty extends SongsSearchState {
@@ -19,7 +20,10 @@ class SearchStateSuccess extends SongsSearchState {
   final List<SongBase> songs;
   final String query;
 
-  SearchStateSuccess(this.songs, this.query) : super([songs]);
+  SearchStateSuccess(this.songs, this.query);
+
+  @override
+  List<Object> get props => [songs, query];
 
   @override
   String toString() => 'SearchStateSuccess { songs: ${songs.length} }';
@@ -28,7 +32,10 @@ class SearchStateSuccess extends SongsSearchState {
 class SearchStateError extends SongsSearchState {
   final String error;
 
-  SearchStateError(this.error) : super([error]);
+  SearchStateError(this.error);
+
+  @override
+  List<Object> get props => [error];
 
   @override
   String toString() => 'SearchStateError { error: $error }';

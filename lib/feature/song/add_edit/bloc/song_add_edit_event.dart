@@ -2,13 +2,17 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc_lyrics/model/song_base.dart';
 
 abstract class SongAddEditEvent extends Equatable{
-  SongAddEditEvent([List props = const []]) : super(props);
+  @override
+  List<Object> get props => [];
 }
 
 class AddSong extends SongAddEditEvent {
   final SongBase song;
 
-  AddSong({this.song}) : super([song]);
+  AddSong({this.song});
+
+  @override
+  List<Object> get props => [song];
 
   @override
   String toString() => "AddSong { song ${song.id}";
@@ -17,7 +21,10 @@ class AddSong extends SongAddEditEvent {
 class EditSong extends SongAddEditEvent {
   final SongBase song;
 
-  EditSong({this.song}) : super([song]);
+  EditSong({this.song});
+
+  @override
+  List<Object> get props => [song];
 
   @override
   String toString() => "EditSong { song ${song.id}";

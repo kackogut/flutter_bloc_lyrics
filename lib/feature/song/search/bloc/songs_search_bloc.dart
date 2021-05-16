@@ -18,7 +18,8 @@ class SongsSearchBloc extends Bloc<SongSearchEvent, SongsSearchState> {
   StreamSubscription addEditBlocSubscription;
 
   SongsSearchBloc(
-      {@required this.lyricsRepository, @required this.songAddEditBloc}) {
+      {@required this.lyricsRepository, @required this.songAddEditBloc})
+      : super(SearchStateEmpty()) {
     addEditBlocSubscription = songAddEditBloc.listen((songAddEditState) {
       if (state is SearchStateSuccess) {
         if (songAddEditState is EditSongStateSuccess) {
@@ -31,19 +32,15 @@ class SongsSearchBloc extends Bloc<SongSearchEvent, SongsSearchState> {
   }
 
   @override
-  SongsSearchState get initialState => SearchStateEmpty();
-
-
-  @override
-  Stream<Transition<SongSearchEvent, SongsSearchState>> transformEvents(Stream<SongSearchEvent> events,
+  Stream<Transition<SongSearchEvent, SongsSearchState>> transformEvents(
+      Stream<SongSearchEvent> events,
       TransitionFunction<SongSearchEvent, SongsSearchState> transitionFn) {
-    final nonDebounceStream =
-        events.where((event) => event is! TextChanged);
+    final nonDebounceStream = events.where((event) => event is! TextChanged);
 
     final debounceStream =
-    events.where((event) => event is TextChanged).debounceTime(
-      Duration(milliseconds: DEFAULT_SEARCH_DEBOUNCE),
-    );
+        events.where((event) => event is TextChanged).debounceTime(
+              Duration(milliseconds: DEFAULT_SEARCH_DEBOUNCE),
+            );
 
     return super.transformEvents(
         MergeStream([nonDebounceStream, debounceStream]), transitionFn);

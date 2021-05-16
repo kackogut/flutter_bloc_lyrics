@@ -10,10 +10,7 @@ import 'package:meta/meta.dart';
 class SongAddEditBloc extends Bloc<SongAddEditEvent, SongAddEditState> {
   final LyricsRepository lyricsRepository;
 
-  SongAddEditBloc({@required this.lyricsRepository});
-
-  @override
-  SongAddEditState get initialState => StateShowSong();
+  SongAddEditBloc({@required this.lyricsRepository}) : super(StateShowSong());
 
   @override
   Stream<SongAddEditState> mapEventToState(SongAddEditEvent event) async* {

@@ -9,14 +9,21 @@ import 'package:flutter_bloc_lyrics/repository/lyrics_repository.dart';
 
 import 'feature/song/search/bloc/songs_search_bloc.dart';
 
-void main() {
+Future<void> main() async {
   final LyricsRepository _lyricsRepository =
       LyricsRepository(LyricsClient(), LocalClient());
 
-  runApp(EasyLocalization(
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+
+  runApp(
+    EasyLocalization(
       path: 'assets/translations',
-      supportedLocales: [Locale('en', 'US')],
-      child: LyricsApp(lyricsRepository: _lyricsRepository)));
+      supportedLocales: [Locale('en')],
+      fallbackLocale: Locale('en'),
+      child: LyricsApp(lyricsRepository: _lyricsRepository),
+    ),
+  );
 }
 
 class LyricsApp extends StatelessWidget {

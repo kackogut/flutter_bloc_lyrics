@@ -23,7 +23,7 @@ void main() {
   });
 
   test('after initialization bloc state is correct', () {
-    expect(StateShowSong(), songAddEditBloc.initialState);
+    expect(StateShowSong(), songAddEditBloc.state);
   });
 
   test('after closing bloc does not emit any states', () {

@@ -2,7 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc_lyrics/model/song_base.dart';
 
 abstract class SongAddEditState extends Equatable {
-  SongAddEditState([List props = const []]) : super(props);
+  @override
+  List<Object> get props => [];
 }
 
 class StateShowSong extends SongAddEditState {
@@ -18,7 +19,10 @@ class StateLoading extends SongAddEditState {
 class AddSongStateSuccess extends SongAddEditState {
   final SongBase song;
 
-  AddSongStateSuccess(this.song) : super([song]);
+  AddSongStateSuccess(this.song);
+
+  @override
+  List<Object> get props => [song];
 
   @override
   String toString() => 'AddSongSuccess {song: $song }';
@@ -27,7 +31,10 @@ class AddSongStateSuccess extends SongAddEditState {
 class EditSongStateSuccess extends SongAddEditState {
   final SongBase song;
 
-  EditSongStateSuccess(this.song) : super([song]);
+  EditSongStateSuccess(this.song);
+
+  @override
+  List<Object> get props => [song];
 
   @override
   String toString() => 'EditSongSuccess {song: $song }';
