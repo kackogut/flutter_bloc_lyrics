@@ -22,7 +22,7 @@ class LocalSongDetails extends StatefulWidget {
 class LocalSongDetailsState extends State<LocalSongDetails> {
   SongBase song;
 
-  SongAddEditBloc _songAddEditBloc;
+  late SongAddEditBloc _songAddEditBloc;
 
   LocalSongDetailsState(this.song);
 
@@ -37,8 +37,7 @@ class LocalSongDetailsState extends State<LocalSongDetails> {
     return BlocListener<SongAddEditBloc, SongAddEditState>(
         bloc: _songAddEditBloc,
         listener: (context, state) {
-          if (state
-          is EditSongStateSuccess) {
+          if (state is EditSongStateSuccess) {
             setState(() {
               song = state.song;
             });
@@ -86,9 +85,11 @@ class LocalSongDetailsState extends State<LocalSongDetails> {
       FloatingActionButton(
         onPressed: () {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => SongAddScreen(song: song)));
+            context,
+            MaterialPageRoute(
+              builder: (context) => SongAddScreen(song: song),
+            ),
+          );
         },
         tooltip: "Edit",
         child: Icon(Icons.edit),

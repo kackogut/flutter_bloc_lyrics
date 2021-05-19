@@ -71,7 +71,9 @@ class SongAddState extends State<SongAddForm> {
                       decoration: InputDecoration(hintText: S.LYRICS.tr()),
                       onSaved: (value) => _lyrics = value,
                       validator: (val) {
-                        return val.trim().isEmpty ? S.EMPTY_LYRICS : null;
+                        return val?.trim().isEmpty == true
+                            ? S.EMPTY_LYRICS
+                            : null;
                       },
                       minLines: 5,
                       maxLines: 20,

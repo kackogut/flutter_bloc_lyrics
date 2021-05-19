@@ -15,11 +15,12 @@ class SongsSearchBloc extends Bloc<SongSearchEvent, SongsSearchState> {
   final LyricsRepository lyricsRepository;
   final SongAddEditBloc songAddEditBloc;
 
-  StreamSubscription addEditBlocSubscription;
+  late StreamSubscription addEditBlocSubscription;
 
-  SongsSearchBloc(
-      {@required this.lyricsRepository, @required this.songAddEditBloc})
-      : super(SearchStateEmpty()) {
+  SongsSearchBloc({
+    required this.lyricsRepository,
+    required this.songAddEditBloc,
+  }) : super(SearchStateEmpty()) {
     addEditBlocSubscription = songAddEditBloc.listen((songAddEditState) {
       if (state is SearchStateSuccess) {
         if (songAddEditState is EditSongStateSuccess) {
@@ -33,8 +34,9 @@ class SongsSearchBloc extends Bloc<SongSearchEvent, SongsSearchState> {
 
   @override
   Stream<Transition<SongSearchEvent, SongsSearchState>> transformEvents(
-      Stream<SongSearchEvent> events,
-      TransitionFunction<SongSearchEvent, SongsSearchState> transitionFn) {
+    Stream<SongSearchEvent> events,
+    TransitionFunction<SongSearchEvent, SongsSearchState> transitionFn,
+  ) {
     final nonDebounceStream = events.where((event) => event is! TextChanged);
 
     final debounceStream =
@@ -43,7 +45,9 @@ class SongsSearchBloc extends Bloc<SongSearchEvent, SongsSearchState> {
             );
 
     return super.transformEvents(
-        MergeStream([nonDebounceStream, debounceStream]), transitionFn);
+      MergeStream([nonDebounceStream, debounceStream]),
+      transitionFn,
+    );
   }
 
   @override
@@ -116,11 +120,6 @@ class SongsSearchBloc extends Bloc<SongSearchEvent, SongsSearchState> {
         yield SearchStateSuccess(updatedList, successState.query);
       }
     }
-  }
-
-  @override
-  void onTransition(Transition<SongSearchEvent, SongsSearchState> transition) {
-    print(transition);
   }
 
   @override

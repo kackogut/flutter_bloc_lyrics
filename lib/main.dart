@@ -29,27 +29,29 @@ Future<void> main() async {
 class LyricsApp extends StatelessWidget {
   final LyricsRepository lyricsRepository;
 
-  const LyricsApp({Key key, @required this.lyricsRepository}) : super(key: key);
+  const LyricsApp({Key? key, required this.lyricsRepository}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-        providers: [
-          BlocProvider<SongAddEditBloc>(
-            create: (context) =>
-                SongAddEditBloc(lyricsRepository: lyricsRepository),
-          ),
-          BlocProvider<SongsSearchBloc>(
-            create: (context) => SongsSearchBloc(
-                lyricsRepository: lyricsRepository,
-                songAddEditBloc: BlocProvider.of<SongAddEditBloc>(context)),
-          ),
-        ],
-        child: MaterialApp(
-            localizationsDelegates: context.localizationDelegates,
-            supportedLocales: context.supportedLocales,
-            locale: context.locale,
-            theme: ThemeData(primaryColor: Colors.blue),
-            home: SearchScreen()));
+      providers: [
+        BlocProvider<SongAddEditBloc>(
+          create: (context) =>
+              SongAddEditBloc(lyricsRepository: lyricsRepository),
+        ),
+        BlocProvider<SongsSearchBloc>(
+          create: (context) => SongsSearchBloc(
+              lyricsRepository: lyricsRepository,
+              songAddEditBloc: BlocProvider.of<SongAddEditBloc>(context)),
+        ),
+      ],
+      child: MaterialApp(
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
+        theme: ThemeData(primaryColor: Colors.blue),
+        home: SearchScreen(),
+      ),
+    );
   }
 }
