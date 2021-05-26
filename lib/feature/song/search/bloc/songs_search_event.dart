@@ -9,7 +9,7 @@ abstract class SongSearchEvent extends Equatable {
 class TextChanged extends SongSearchEvent {
   final String query;
 
-  TextChanged({this.query});
+  TextChanged({required this.query});
 
   @override
   List<Object> get props => [query];
@@ -21,7 +21,7 @@ class TextChanged extends SongSearchEvent {
 class RemoveSong extends SongSearchEvent {
   final int songID;
 
-  RemoveSong({this.songID});
+  RemoveSong({required this.songID});
 
   @override
   List<Object> get props => [songID];
@@ -33,7 +33,7 @@ class RemoveSong extends SongSearchEvent {
 class SongUpdated extends SongSearchEvent {
   final SongBase song;
 
-  SongUpdated({this.song});
+  SongUpdated({required this.song});
 
   @override
   List<Object> get props => [song];
@@ -45,7 +45,7 @@ class SongUpdated extends SongSearchEvent {
 class SongAdded extends SongSearchEvent {
   final SongBase song;
 
-  SongAdded({this.song});
+  SongAdded({required this.song});
 
   @override
   List<Object> get props => [song];

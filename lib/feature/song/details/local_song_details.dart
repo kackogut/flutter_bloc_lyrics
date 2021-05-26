@@ -11,7 +11,7 @@ import 'package:flutter_bloc_lyrics/resources/langs/strings.dart';
 class LocalSongDetails extends StatefulWidget {
   final SongBase song;
 
-  LocalSongDetails({this.song});
+  LocalSongDetails({required this.song});
 
   @override
   State<StatefulWidget> createState() {

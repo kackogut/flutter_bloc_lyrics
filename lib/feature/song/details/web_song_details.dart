@@ -6,7 +6,7 @@ import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 class WebSongDetails extends StatelessWidget {
   final String songDetailsURL;
 
-  WebSongDetails({this.songDetailsURL});
+  WebSongDetails({required this.songDetailsURL});
 
   @override
   Widget build(BuildContext context) {

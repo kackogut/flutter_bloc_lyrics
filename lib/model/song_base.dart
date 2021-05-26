@@ -4,7 +4,7 @@ class SongBase {
   final String lyrics;
   final String lyricsURL;
   final String albumThumbnail;
-  final int id;
+  final int? id;
 
   const SongBase(
       {this.title,

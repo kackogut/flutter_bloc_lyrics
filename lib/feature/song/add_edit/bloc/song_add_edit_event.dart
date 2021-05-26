@@ -9,7 +9,7 @@ abstract class SongAddEditEvent extends Equatable{
 class AddSong extends SongAddEditEvent {
   final SongBase song;
 
-  AddSong({this.song});
+  AddSong({required this.song});
 
   @override
   List<Object> get props => [song];
@@ -21,7 +21,7 @@ class AddSong extends SongAddEditEvent {
 class EditSong extends SongAddEditEvent {
   final SongBase song;
 
-  EditSong({this.song});
+  EditSong({required this.song});
 
   @override
   List<Object> get props => [song];

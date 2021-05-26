@@ -41,7 +41,7 @@ class SongsSearchList extends StatelessWidget {
 class _SongsSearchResults extends StatelessWidget {
   final List<SongBase> songsList;
 
-  const _SongsSearchResults({Key key, @required this.songsList})
+  const _SongsSearchResults({Key? key, required this.songsList})
       : super(key: key);
 
   @override
@@ -59,7 +59,7 @@ class _SongsSearchResults extends StatelessWidget {
 class _SongSearchResultItem extends StatelessWidget {
   final SongBase song;
 
-  const _SongSearchResultItem({Key key, this.song}) : super(key: key);
+  const _SongSearchResultItem({Key? key, required this.song}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -70,8 +70,9 @@ class _SongSearchResultItem extends StatelessWidget {
               color: Colors.red,
             ),
             onDismissed: (direction) {
+              // TODO: fix id
               BlocProvider.of<SongsSearchBloc>(context)
-                  .add(RemoveSong(songID: song.id));
+                  .add(RemoveSong(songID: song?.id ?? 0));
             },
             key: Key(UniqueKey().toString()),
             child: _getSongDetailsLayout(context));

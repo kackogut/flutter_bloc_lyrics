@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-SizedBox getBaseButton({String text, VoidCallback onPressed}) {
+SizedBox getBaseButton({required String text, required VoidCallback onPressed}) {
   return SizedBox(
       height: 48.0,
       width: double.infinity,
