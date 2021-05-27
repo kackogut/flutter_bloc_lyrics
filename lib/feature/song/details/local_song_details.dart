@@ -75,7 +75,7 @@ class LocalSongDetailsState extends State<LocalSongDetails> {
             padding: EdgeInsets.only(top: 16.0),
           ),
           Text(
-            song.lyrics,
+            song.lyrics ?? "",
             style: Theme.of(context).textTheme.body2,
           )
         ],

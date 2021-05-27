@@ -12,7 +12,7 @@ dependencies:
   http: ^0.13.3
   flutter_bloc: ^7.0.0
   rxdart: ^0.27.0
-  flutter_webview_plugin: ^0.3.11
+  flutter_webview_plugin: ^0.4.0
   easy_localization: ^3.0.0
   flutter:
     sdk: flutter

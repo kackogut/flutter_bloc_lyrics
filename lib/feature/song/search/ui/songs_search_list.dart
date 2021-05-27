@@ -72,7 +72,7 @@ class _SongSearchResultItem extends StatelessWidget {
             onDismissed: (direction) {
               // TODO: fix id
               BlocProvider.of<SongsSearchBloc>(context)
-                  .add(RemoveSong(songID: song?.id ?? 0));
+                  .add(RemoveSong(songID: song.id ?? 0));
             },
             key: Key(UniqueKey().toString()),
             child: _getSongDetailsLayout(context));
@@ -85,7 +85,7 @@ class _SongSearchResultItem extends StatelessWidget {
           leading: song.albumThumbnail == null
               ? Icon(Icons.sd_card)
               : Image.network(
-                  song.albumThumbnail,
+                  song.albumThumbnail!,
                 ),
           title: Text(song.title),
           onTap: () {
