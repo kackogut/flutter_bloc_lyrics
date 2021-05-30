@@ -55,7 +55,7 @@ class SongAddState extends State<SongAddForm> {
                 decoration: InputDecoration(hintText: S.TITLE.tr()),
                 onSaved: (value) => _title = value,
                 validator: (val) {
-                  return val?.trim().isEmpty == false ? null : S.EMPTY_TITLE;
+                  return val?.trim().isEmpty == true ? S.EMPTY_TITLE.tr() : null;
                 },
               ),
               TextFormField(
@@ -63,7 +63,7 @@ class SongAddState extends State<SongAddForm> {
                 decoration: InputDecoration(hintText: S.ARTIST.tr()),
                 onSaved: (value) => _artist = value,
                 validator: (val) {
-                  return val?.trim().isEmpty == true ? S.EMPTY_ARTIST : null;
+                  return val?.trim().isEmpty == true ? S.EMPTY_ARTIST.tr() : null;
                 },
               ),
               TextFormField(
@@ -71,7 +71,7 @@ class SongAddState extends State<SongAddForm> {
                 decoration: InputDecoration(hintText: S.LYRICS.tr()),
                 onSaved: (value) => _lyrics = value,
                 validator: (val) {
-                  return val?.trim().isEmpty == false ? null : S.EMPTY_LYRICS;
+                  return val?.trim().isEmpty == true ? S.EMPTY_LYRICS.tr() : null;
                 },
                 minLines: 5,
                 maxLines: 20,

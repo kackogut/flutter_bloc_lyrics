@@ -12,7 +12,7 @@ class LocalClient {
   }
 
   Future<SongBase> editSong(SongBase song) async {
-    Future.delayed(Duration(milliseconds: 1000));
+    await Future.delayed(Duration(milliseconds: 1000));
     localSongsList[song.id!] = song;
     return song;
   }

@@ -1,5 +1,3 @@
-import 'package:flutter_bloc_lyrics/model/song_base.dart';
-
 class Artist {
   final String name;
 

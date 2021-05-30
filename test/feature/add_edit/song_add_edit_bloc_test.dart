@@ -1,5 +1,4 @@
 import 'package:flutter_bloc_lyrics/feature/song/add_edit/bloc/song_add_edit.dart';
-import 'package:flutter_bloc_lyrics/feature/song/search/bloc/songs_search.dart';
 import 'package:flutter_bloc_lyrics/model/song_base.dart';
 import 'package:flutter_bloc_lyrics/repository/lyrics_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -10,8 +9,8 @@ class MockLyricsRepository extends Mock implements LyricsRepository {}
 class MockSongBase extends Mock implements SongBase {}
 
 void main() {
-  SongAddEditBloc songAddEditBloc;
-  MockLyricsRepository lyricsRepository;
+  late SongAddEditBloc songAddEditBloc;
+  late MockLyricsRepository lyricsRepository;
 
   setUp(() {
     lyricsRepository = MockLyricsRepository();
@@ -19,20 +18,20 @@ void main() {
   });
 
   tearDown(() {
-    songAddEditBloc?.close();
+    songAddEditBloc.close();
   });
 
-  test('after initialization bloc state is correct', () {
+  test('after initialization bloc state is correct', () async {
     expect(StateShowSong(), songAddEditBloc.state);
   });
 
-  test('after closing bloc does not emit any states', () {
+  test('after closing bloc does not emit any states', () async {
     expectLater(songAddEditBloc, emitsInOrder([StateShowSong(), emitsDone]));
 
     songAddEditBloc.close();
   });
 
-  test('after adding a song songAddedState should be emited', () {
+  test('after adding a song songAddedState should be emited', () async {
 
     MockSongBase songToAdd = MockSongBase();
 
@@ -50,7 +49,7 @@ void main() {
     songAddEditBloc.add(AddSong(song:songToAdd));
   });
 
-  test('after editing a song songEditedState should be emited', () {
+  test('after editing a song songEditedState should be emited', () async {
 
     MockSongBase songToAdd = MockSongBase();
 

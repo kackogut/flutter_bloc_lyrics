@@ -22,10 +22,11 @@ class SongBase {
 
   SongBase copyWith({title, artist, lyrics, lyricsURL, albumThumbnail, id}) =>
       SongBase(
-          title: title ?? this.title,
-          artist: artist ?? this.artist,
-          lyrics: lyrics ?? this.lyrics,
-          lyricsURL: lyricsURL ?? this.lyricsURL,
-          albumThumbnail: albumThumbnail ?? this.albumThumbnail,
-          id: id ?? this.id);
+        title: title ?? this.title,
+        artist: artist ?? this.artist,
+        lyrics: lyrics ?? this.lyrics,
+        lyricsURL: lyricsURL ?? this.lyricsURL,
+        albumThumbnail: albumThumbnail ?? this.albumThumbnail,
+        id: id ?? this.id,
+      );
 }

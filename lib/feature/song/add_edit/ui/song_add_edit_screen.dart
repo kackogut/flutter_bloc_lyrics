@@ -26,25 +26,28 @@ class SongAddScreenState extends State<StatefulWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(song?.id == null ? S.ADD_SONG : S.EDIT_SONG).tr(),
-        ),
-        body: BlocBuilder(
-            bloc: BlocProvider.of<SongAddEditBloc>(context),
-            builder: (BuildContext context, SongAddEditState state) {
-              return Stack(
-                children: <Widget>[
-                  Container(
-                    child: SongAddForm(song: song),
-                  ),
-                  Align(
-                      alignment: Alignment.center,
-                      child: Visibility(
-                        child: BaseLoadingView(),
-                        visible: state is StateLoading,
-                      ))
-                ],
-              );
-            }));
+      appBar: AppBar(
+        title: Text(song?.id == null ? S.ADD_SONG : S.EDIT_SONG).tr(),
+      ),
+      body: BlocBuilder(
+        bloc: BlocProvider.of<SongAddEditBloc>(context),
+        builder: (BuildContext context, SongAddEditState state) {
+          return Stack(
+            children: <Widget>[
+              Container(
+                child: SongAddForm(song: song),
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Visibility(
+                  child: BaseLoadingView(),
+                  visible: state is StateLoading,
+                ),
+              )
+            ],
+          );
+        },
+      ),
+    );
   }
 }

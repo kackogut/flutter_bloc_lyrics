@@ -8,7 +8,6 @@ import 'package:flutter_bloc_lyrics/feature/song/search/bloc/songs_search_state.
 import 'package:flutter_bloc_lyrics/model/api/search_result_error.dart';
 import 'package:flutter_bloc_lyrics/model/song_base.dart';
 import 'package:flutter_bloc_lyrics/repository/lyrics_repository.dart';
-import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
 class SongsSearchBloc extends Bloc<SongSearchEvent, SongsSearchState> {
@@ -21,7 +20,7 @@ class SongsSearchBloc extends Bloc<SongSearchEvent, SongsSearchState> {
     required this.lyricsRepository,
     required this.songAddEditBloc,
   }) : super(SearchStateEmpty()) {
-    addEditBlocSubscription = songAddEditBloc.listen((songAddEditState) {
+    addEditBlocSubscription = songAddEditBloc.stream.listen((songAddEditState) {
       if (state is SearchStateSuccess) {
         if (songAddEditState is EditSongStateSuccess) {
           add(SongUpdated(song: songAddEditState.song));
