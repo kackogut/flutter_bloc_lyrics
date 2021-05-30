@@ -5,12 +5,11 @@ import 'package:flutter_bloc_lyrics/feature/song/add_edit/bloc/song_add_edit_eve
 import 'package:flutter_bloc_lyrics/feature/song/add_edit/bloc/song_add_edit_state.dart';
 import 'package:flutter_bloc_lyrics/model/song_base.dart';
 import 'package:flutter_bloc_lyrics/repository/lyrics_repository.dart';
-import 'package:meta/meta.dart';
 
 class SongAddEditBloc extends Bloc<SongAddEditEvent, SongAddEditState> {
   final LyricsRepository lyricsRepository;
 
-  SongAddEditBloc({@required this.lyricsRepository}) : super(StateShowSong());
+  SongAddEditBloc({required this.lyricsRepository}) : super(StateShowSong());
 
   @override
   Stream<SongAddEditState> mapEventToState(SongAddEditEvent event) async* {
@@ -28,15 +27,9 @@ class SongAddEditBloc extends Bloc<SongAddEditEvent, SongAddEditState> {
     yield AddSongStateSuccess(updatedSong);
   }
 
-
   Stream<SongAddEditState> _mapSongEditToState(EditSong event) async* {
     yield StateLoading();
     SongBase updatedSong = await lyricsRepository.editSong(event.song);
     yield EditSongStateSuccess(updatedSong);
-  }
-
-  @override
-  void onTransition(Transition<SongAddEditEvent, SongAddEditState> transition) {
-    print(transition);
   }
 }

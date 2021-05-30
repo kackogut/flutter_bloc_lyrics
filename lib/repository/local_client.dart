@@ -2,7 +2,7 @@ import 'package:flutter_bloc_lyrics/model/song_base.dart';
 
 //Mocked repository which works as remote client
 class LocalClient {
-  final List<SongBase> localSongsList = List();
+  final List<SongBase> localSongsList = List.empty(growable: true);
 
   Future<SongBase> addSong(SongBase song) async {
     await Future.delayed(Duration(milliseconds: 100));
@@ -12,8 +12,8 @@ class LocalClient {
   }
 
   Future<SongBase> editSong(SongBase song) async {
-    Future.delayed(Duration(milliseconds: 1000));
-    localSongsList[song.id] = song;
+    await Future.delayed(Duration(milliseconds: 1000));
+    localSongsList[song.id!] = song;
     return song;
   }
 

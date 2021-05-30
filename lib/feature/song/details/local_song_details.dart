@@ -3,15 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_lyrics/feature/song/add_edit/bloc/song_add_edit.dart';
 import 'package:flutter_bloc_lyrics/feature/song/add_edit/ui/song_add_edit_screen.dart';
-import 'package:flutter_bloc_lyrics/feature/song/search/bloc/songs_search_bloc.dart';
-import 'package:flutter_bloc_lyrics/feature/song/search/bloc/songs_search_state.dart';
 import 'package:flutter_bloc_lyrics/model/song_base.dart';
 import 'package:flutter_bloc_lyrics/resources/langs/strings.dart';
 
 class LocalSongDetails extends StatefulWidget {
   final SongBase song;
 
-  LocalSongDetails({this.song});
+  LocalSongDetails({required this.song});
 
   @override
   State<StatefulWidget> createState() {
@@ -22,7 +20,7 @@ class LocalSongDetails extends StatefulWidget {
 class LocalSongDetailsState extends State<LocalSongDetails> {
   SongBase song;
 
-  SongAddEditBloc _songAddEditBloc;
+  late SongAddEditBloc _songAddEditBloc;
 
   LocalSongDetailsState(this.song);
 
@@ -37,8 +35,7 @@ class LocalSongDetailsState extends State<LocalSongDetails> {
     return BlocListener<SongAddEditBloc, SongAddEditState>(
         bloc: _songAddEditBloc,
         listener: (context, state) {
-          if (state
-          is EditSongStateSuccess) {
+          if (state is EditSongStateSuccess) {
             setState(() {
               song = state.song;
             });
@@ -76,7 +73,7 @@ class LocalSongDetailsState extends State<LocalSongDetails> {
             padding: EdgeInsets.only(top: 16.0),
           ),
           Text(
-            song.lyrics,
+            song.lyrics ?? "",
             style: Theme.of(context).textTheme.body2,
           )
         ],
@@ -86,9 +83,11 @@ class LocalSongDetailsState extends State<LocalSongDetails> {
       FloatingActionButton(
         onPressed: () {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => SongAddScreen(song: song)));
+            context,
+            MaterialPageRoute(
+              builder: (context) => SongAddScreen(song: song),
+            ),
+          );
         },
         tooltip: "Edit",
         child: Icon(Icons.edit),

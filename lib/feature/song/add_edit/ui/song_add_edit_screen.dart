@@ -8,9 +8,9 @@ import 'package:flutter_bloc_lyrics/resources/langs/strings.dart';
 import 'package:flutter_bloc_lyrics/widgets/loading.dart';
 
 class SongAddScreen extends StatefulWidget {
-  final SongBase song;
+  final SongBase? song;
 
-  SongAddScreen({@required this.song});
+  SongAddScreen({this.song});
 
   @override
   State<StatefulWidget> createState() => SongAddScreenState(
@@ -19,32 +19,35 @@ class SongAddScreen extends StatefulWidget {
 }
 
 class SongAddScreenState extends State<StatefulWidget> {
-  final SongBase song;
+  final SongBase? song;
 
-  SongAddScreenState({@required this.song});
+  SongAddScreenState({this.song});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(song?.id == null ? S.ADD_SONG : S.EDIT_SONG).tr(),
-        ),
-        body: BlocBuilder(
-            bloc: BlocProvider.of<SongAddEditBloc>(context),
-            builder: (BuildContext context, SongAddEditState state) {
-              return Stack(
-                children: <Widget>[
-                  Container(
-                    child: SongAddForm(song: song),
-                  ),
-                  Align(
-                      alignment: Alignment.center,
-                      child: Visibility(
-                        child: BaseLoadingView(),
-                        visible: state is StateLoading,
-                      ))
-                ],
-              );
-            }));
+      appBar: AppBar(
+        title: Text(song?.id == null ? S.ADD_SONG : S.EDIT_SONG).tr(),
+      ),
+      body: BlocBuilder(
+        bloc: BlocProvider.of<SongAddEditBloc>(context),
+        builder: (BuildContext context, SongAddEditState state) {
+          return Stack(
+            children: <Widget>[
+              Container(
+                child: SongAddForm(song: song),
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Visibility(
+                  child: BaseLoadingView(),
+                  visible: state is StateLoading,
+                ),
+              )
+            ],
+          );
+        },
+      ),
+    );
   }
 }

@@ -8,19 +8,19 @@ import 'package:flutter_bloc_lyrics/feature/song/search/bloc/songs_search_state.
 import 'package:flutter_bloc_lyrics/model/api/search_result_error.dart';
 import 'package:flutter_bloc_lyrics/model/song_base.dart';
 import 'package:flutter_bloc_lyrics/repository/lyrics_repository.dart';
-import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
 class SongsSearchBloc extends Bloc<SongSearchEvent, SongsSearchState> {
   final LyricsRepository lyricsRepository;
   final SongAddEditBloc songAddEditBloc;
 
-  StreamSubscription addEditBlocSubscription;
+  late StreamSubscription addEditBlocSubscription;
 
-  SongsSearchBloc(
-      {@required this.lyricsRepository, @required this.songAddEditBloc})
-      : super(SearchStateEmpty()) {
-    addEditBlocSubscription = songAddEditBloc.listen((songAddEditState) {
+  SongsSearchBloc({
+    required this.lyricsRepository,
+    required this.songAddEditBloc,
+  }) : super(SearchStateEmpty()) {
+    addEditBlocSubscription = songAddEditBloc.stream.listen((songAddEditState) {
       if (state is SearchStateSuccess) {
         if (songAddEditState is EditSongStateSuccess) {
           add(SongUpdated(song: songAddEditState.song));
@@ -33,8 +33,9 @@ class SongsSearchBloc extends Bloc<SongSearchEvent, SongsSearchState> {
 
   @override
   Stream<Transition<SongSearchEvent, SongsSearchState>> transformEvents(
-      Stream<SongSearchEvent> events,
-      TransitionFunction<SongSearchEvent, SongsSearchState> transitionFn) {
+    Stream<SongSearchEvent> events,
+    TransitionFunction<SongSearchEvent, SongsSearchState> transitionFn,
+  ) {
     final nonDebounceStream = events.where((event) => event is! TextChanged);
 
     final debounceStream =
@@ -43,7 +44,9 @@ class SongsSearchBloc extends Bloc<SongSearchEvent, SongsSearchState> {
             );
 
     return super.transformEvents(
-        MergeStream([nonDebounceStream, debounceStream]), transitionFn);
+      MergeStream([nonDebounceStream, debounceStream]),
+      transitionFn,
+    );
   }
 
   @override
@@ -83,7 +86,7 @@ class SongsSearchBloc extends Bloc<SongSearchEvent, SongsSearchState> {
   Stream<SongsSearchState> _mapSongRemoveToState(RemoveSong event) async* {
     await lyricsRepository.removeSong(event.songID);
     if (state is SearchStateSuccess) {
-      SearchStateSuccess searchState = state;
+      SearchStateSuccess searchState = state as SearchStateSuccess;
       searchState.songs.removeWhere((song) {
         return song.id == event.songID;
       });
@@ -93,7 +96,7 @@ class SongsSearchBloc extends Bloc<SongSearchEvent, SongsSearchState> {
 
   Stream<SongsSearchState> _mapSongUpdateToState(SongUpdated event) async* {
     if (state is SearchStateSuccess) {
-      SearchStateSuccess successState = state;
+      SearchStateSuccess successState = state as SearchStateSuccess;
       List<SongBase> updatedList = successState.songs;
       if (event.song.isInQuery(successState.query)) {
         updatedList = updatedList.map((song) {
@@ -108,7 +111,7 @@ class SongsSearchBloc extends Bloc<SongSearchEvent, SongsSearchState> {
 
   Stream<SongsSearchState> _mapSongAddedToState(SongAdded event) async* {
     if (state is SearchStateSuccess) {
-      SearchStateSuccess successState = state;
+      SearchStateSuccess successState = state as SearchStateSuccess;
       List<SongBase> updatedList = List.from(successState.songs);
 
       if (event.song.isInQuery(successState.query)) {
@@ -116,11 +119,6 @@ class SongsSearchBloc extends Bloc<SongSearchEvent, SongsSearchState> {
         yield SearchStateSuccess(updatedList, successState.query);
       }
     }
-  }
-
-  @override
-  void onTransition(Transition<SongSearchEvent, SongsSearchState> transition) {
-    print(transition);
   }
 
   @override

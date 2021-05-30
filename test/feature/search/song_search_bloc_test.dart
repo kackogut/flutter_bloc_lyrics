@@ -15,12 +15,12 @@ class MockAddEditBloc extends Mock implements SongAddEditBloc {}
 SongBase songInList = MockSongBase();
 
 void main() {
-  SongAddEditBloc songAddEditBloc;
-  SongsSearchBloc songsSearchBloc;
-  MockLyricsRepository lyricsRepository;
+  late SongAddEditBloc songAddEditBloc;
+  late SongsSearchBloc songsSearchBloc;
+  late MockLyricsRepository lyricsRepository;
 
   String query = "query.test";
-  List<SongBase> songsList = List<SongBase>();
+  List<SongBase> songsList = List.empty();
   int songToRemoveID = 1;
 
   setUp(() {
@@ -39,15 +39,15 @@ void main() {
   });
 
   tearDown(() {
-    songAddEditBloc?.close();
-    songsSearchBloc?.close();
+    songAddEditBloc.close();
+    songsSearchBloc.close();
   });
 
-  test('after initialization bloc state is correct', () {
-    expect(SearchStateEmpty(), songsSearchBloc.state);
+  test('after initialization bloc state is correct', () async {
+    await expectLater(SearchStateEmpty(), songsSearchBloc.state);
   });
 
-  test('after closing bloc does not emit any states', () {
+  test('after closing bloc does not emit any states', () async {
     expectLater(songsSearchBloc, emitsInOrder([SearchStateEmpty(), emitsDone]));
 
     songsSearchBloc.close();
@@ -84,7 +84,7 @@ void main() {
     songList.insert(0, songToAdd);
     songsSearchBloc.add(SongAdded(song: songToAdd));
     await Future.delayed(const Duration(seconds: 1), () {});
-    SearchStateSuccess stateSuccess = songsSearchBloc.state;
+    SearchStateSuccess stateSuccess = songsSearchBloc.state as SearchStateSuccess;
     assert (listEquals(stateSuccess.songs, songList));
   });
 

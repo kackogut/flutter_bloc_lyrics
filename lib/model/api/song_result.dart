@@ -4,7 +4,7 @@ import 'package:flutter_bloc_lyrics/model/song_base.dart';
 class SongSearchResult {
   final SongResultItem songResultItem;
 
-  const SongSearchResult({this.songResultItem});
+  const SongSearchResult({required this.songResultItem});
 
   static SongSearchResult fromJson(dynamic json) {
     return SongSearchResult(

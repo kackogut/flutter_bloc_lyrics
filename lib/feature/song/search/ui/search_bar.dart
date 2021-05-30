@@ -11,7 +11,7 @@ class SearchBar extends StatefulWidget {
 
 class _SearchBarState extends State<SearchBar> {
   final _songSearchController = TextEditingController();
-  SongsSearchBloc _songSearchBloc;
+  late SongsSearchBloc _songSearchBloc;
 
   @override
   void initState() {
