@@ -1,37 +1,25 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter_bloc_lyrics/feature/song/add_edit/bloc/song_add_edit_event.dart';
 import 'package:flutter_bloc_lyrics/feature/song/add_edit/bloc/song_add_edit_state.dart';
 import 'package:flutter_bloc_lyrics/model/domain/local_song.dart';
 import 'package:flutter_bloc_lyrics/model/domain/song_base.dart';
 import 'package:flutter_bloc_lyrics/repository/lyrics_repository.dart';
 
-// TODO: change to cubit
-class SongAddEditBloc extends Bloc<SongAddEditEvent, SongAddEditState> {
+class SongAddEditBloc extends Cubit<SongAddEditState> {
   final LyricsRepository lyricsRepository;
 
   SongAddEditBloc({required this.lyricsRepository}) : super(StateShowSong());
 
-  @override
-  Stream<SongAddEditState> mapEventToState(SongAddEditEvent event) async* {
-    if (event is AddSong) {
-      yield* _mapSongAddToState(event);
-    }
-    if (event is EditSong) {
-      yield* _mapSongEditToState(event);
-    }
-  }
-
-  Stream<SongAddEditState> _mapSongAddToState(AddSong event) async* {
+  Stream<SongAddEditState> addSong(LocalSong song) async* {
     yield StateLoading();
-    SongBase updatedSong = await lyricsRepository.addSong(event.song);
+    SongBase updatedSong = await lyricsRepository.addSong(song);
     yield AddSongStateSuccess(updatedSong);
   }
 
-  Stream<SongAddEditState> _mapSongEditToState(EditSong event) async* {
+  Stream<SongAddEditState> editSong(LocalSong song) async* {
     yield StateLoading();
-    LocalSong updatedSong = await lyricsRepository.editSong(event.song);
+    LocalSong updatedSong = await lyricsRepository.editSong(song);
     yield EditSongStateSuccess(updatedSong);
   }
 }
