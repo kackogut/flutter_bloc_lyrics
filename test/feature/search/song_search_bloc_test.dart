@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc_lyrics/feature/song/add_edit/bloc/song_add_edit.dart';
 import 'package:flutter_bloc_lyrics/feature/song/search/bloc/songs_search.dart';
-import 'package:flutter_bloc_lyrics/model/song_base.dart';
+import 'package:flutter_bloc_lyrics/model/domain/song_base.dart';
 import 'package:flutter_bloc_lyrics/repository/lyrics_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';

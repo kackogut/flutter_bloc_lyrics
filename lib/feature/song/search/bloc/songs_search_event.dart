@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc_lyrics/model/song_base.dart';
+import 'package:flutter_bloc_lyrics/model/domain/song_base.dart';
 
 abstract class SongSearchEvent extends Equatable {
   @override

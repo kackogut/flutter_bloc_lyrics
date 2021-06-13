@@ -17,8 +17,10 @@ class SearchItems {
 
   static SearchItems fromJson(Map<String, dynamic> json) {
     final items = (json['hits'] as List<dynamic>)
-        .map((dynamic item) =>
-            SongSearchResult.fromJson(item as Map<String, dynamic>))
+        .map(
+          (dynamic item) =>
+              SongSearchResult.fromJson(item as Map<String, dynamic>),
+        )
         .toList();
     return SearchItems(songs: items);
   }

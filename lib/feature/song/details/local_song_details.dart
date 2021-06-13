@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_lyrics/feature/song/add_edit/bloc/song_add_edit.dart';
 import 'package:flutter_bloc_lyrics/feature/song/add_edit/ui/song_add_edit_screen.dart';
-import 'package:flutter_bloc_lyrics/model/song_base.dart';
+import 'package:flutter_bloc_lyrics/model/domain/local_song.dart';
 import 'package:flutter_bloc_lyrics/resources/langs/strings.dart';
 
 class LocalSongDetails extends StatefulWidget {
-  final SongBase song;
+  final LocalSong song;
 
   LocalSongDetails({required this.song});
 
@@ -18,7 +18,7 @@ class LocalSongDetails extends StatefulWidget {
 }
 
 class LocalSongDetailsState extends State<LocalSongDetails> {
-  SongBase song;
+  LocalSong song;
 
   late SongAddEditBloc _songAddEditBloc;
 
@@ -32,52 +32,56 @@ class LocalSongDetailsState extends State<LocalSongDetails> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: Change to BlocBuilder
     return BlocListener<SongAddEditBloc, SongAddEditState>(
-        bloc: _songAddEditBloc,
-        listener: (context, state) {
-          if (state is EditSongStateSuccess) {
-            setState(() {
-              song = state.song;
-            });
-          }
-        },
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text(S.SONG_DETAILS).tr(),
-          ),
-          body: _getScreenBody(context),
-          floatingActionButton: _getFloatingButton(context),
-        ));
+      bloc: _songAddEditBloc,
+      listener: (context, state) {
+        if (state is EditSongStateSuccess) {
+          setState(() {
+            song = state.song;
+          });
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(S.SONG_DETAILS).tr(),
+        ),
+        body: _getScreenBody(context),
+        floatingActionButton: _getFloatingButton(context),
+      ),
+    );
   }
 
   Padding _getScreenBody(BuildContext context) => Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
-      child: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: SingleChildScrollView(
           child: Column(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(top: 8.0),
+            children: <Widget>[
+              const Padding(
+                padding: EdgeInsets.only(top: 8.0),
+              ),
+              Text(
+                song.artist,
+                style: Theme.of(context).textTheme.subtitle2,
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 8.0),
+              ),
+              Text(
+                song.title,
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 16.0),
+              ),
+              Text(
+                song.lyrics,
+                style: Theme.of(context).textTheme.bodyText1,
+              )
+            ],
           ),
-          Text(
-            song.artist,
-            style: Theme.of(context).textTheme.subtitle,
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 8.0),
-          ),
-          Text(
-            song.title,
-            style: Theme.of(context).textTheme.title,
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 16.0),
-          ),
-          Text(
-            song.lyrics ?? "",
-            style: Theme.of(context).textTheme.body2,
-          )
-        ],
-      )));
+        ),
+      );
 
   FloatingActionButton _getFloatingButton(BuildContext context) =>
       FloatingActionButton(
@@ -89,7 +93,7 @@ class LocalSongDetailsState extends State<LocalSongDetails> {
             ),
           );
         },
-        tooltip: "Edit",
+        tooltip: S.EDIT.tr(),
         child: Icon(Icons.edit),
       );
 }

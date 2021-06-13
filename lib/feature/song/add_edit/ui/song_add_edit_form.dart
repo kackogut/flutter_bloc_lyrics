@@ -2,12 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_lyrics/feature/song/add_edit/bloc/song_add_edit.dart';
-import 'package:flutter_bloc_lyrics/model/song_base.dart';
+import 'package:flutter_bloc_lyrics/model/domain/local_song.dart';
 import 'package:flutter_bloc_lyrics/resources/langs/strings.dart';
 import 'package:flutter_bloc_lyrics/widgets/buttons.dart';
 
 class SongAddForm extends StatefulWidget {
-  final SongBase? song;
+  final LocalSong? song;
 
   SongAddForm({this.song});
 
@@ -25,7 +25,7 @@ class SongAddState extends State<SongAddForm> {
 
   late SongAddEditBloc _songAddEditBloc;
 
-  final SongBase? _song;
+  final LocalSong? _song;
 
   SongAddState(this._song);
 
@@ -55,7 +55,9 @@ class SongAddState extends State<SongAddForm> {
                 decoration: InputDecoration(hintText: S.TITLE.tr()),
                 onSaved: (value) => _title = value,
                 validator: (val) {
-                  return val?.trim().isEmpty == true ? S.EMPTY_TITLE.tr() : null;
+                  return val?.trim().isEmpty == true
+                      ? S.EMPTY_TITLE.tr()
+                      : null;
                 },
               ),
               TextFormField(
@@ -63,7 +65,9 @@ class SongAddState extends State<SongAddForm> {
                 decoration: InputDecoration(hintText: S.ARTIST.tr()),
                 onSaved: (value) => _artist = value,
                 validator: (val) {
-                  return val?.trim().isEmpty == true ? S.EMPTY_ARTIST.tr() : null;
+                  return val?.trim().isEmpty == true
+                      ? S.EMPTY_ARTIST.tr()
+                      : null;
                 },
               ),
               TextFormField(
@@ -71,30 +75,34 @@ class SongAddState extends State<SongAddForm> {
                 decoration: InputDecoration(hintText: S.LYRICS.tr()),
                 onSaved: (value) => _lyrics = value,
                 validator: (val) {
-                  return val?.trim().isEmpty == true ? S.EMPTY_LYRICS.tr() : null;
+                  return val?.trim().isEmpty == true
+                      ? S.EMPTY_LYRICS.tr()
+                      : null;
                 },
                 minLines: 5,
                 maxLines: 20,
               ),
               Spacer(),
               Padding(
-                  padding: EdgeInsets.only(bottom: 16.0),
-                  child: getBaseButton(
-                      onPressed: () {
-                        if (_formKey.currentState?.validate() == true) {
-                          _formKey.currentState?.save();
-                          SongBase updatedSong = SongBase(
-                            id: _song?.id,
-                            title: _title ?? "",
-                            lyrics: _lyrics ?? "",
-                            artist: _artist ?? "",
-                          );
-                          _songAddEditBloc.add(_song == null
-                              ? AddSong(song: updatedSong)
-                              : EditSong(song: updatedSong));
-                        }
-                      },
-                      text: (_song != null ? S.EDIT : S.ADD_SONG).tr()))
+                padding: EdgeInsets.only(bottom: 16.0),
+                child: getBaseButton(
+                    onPressed: () {
+                      if (_formKey.currentState?.validate() == true) {
+                        _formKey.currentState?.save();
+                        // TODO: fix id
+                        LocalSong updatedSong = LocalSong(
+                          id: _song?.id ?? -1,
+                          title: _title ?? "",
+                          lyrics: _lyrics ?? "",
+                          artist: _artist ?? "",
+                        );
+                        _song == null
+                            ? _songAddEditBloc.addSong(updatedSong)
+                            : _songAddEditBloc.editSong(updatedSong);
+                      }
+                    },
+                    text: (_song != null ? S.EDIT : S.ADD_SONG).tr()),
+              )
             ],
           ),
         ),

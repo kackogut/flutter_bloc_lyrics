@@ -1,5 +1,4 @@
 import 'package:flutter_bloc_lyrics/model/api/song_artist.dart';
-import 'package:flutter_bloc_lyrics/model/song_base.dart';
 
 class SongSearchResult {
   final SongResultItem songResultItem;
@@ -8,19 +7,33 @@ class SongSearchResult {
 
   static SongSearchResult fromJson(dynamic json) {
     return SongSearchResult(
-        songResultItem: SongResultItem.fromJson(json['result']));
+      songResultItem: SongResultItem.fromJson(json['result']),
+    );
   }
 }
 
-class SongResultItem extends SongBase {
-  const SongResultItem({title, lyricsURL, thumbnailURL, artistName})
-      : super(title: title, lyricsURL: lyricsURL, albumThumbnail: thumbnailURL, artist: artistName);
+class SongResultItem {
+  final int id;
+  final String title;
+  final String artist;
+  final String lyricsURL;
+  final String albumThumbnail;
+
+  const SongResultItem({
+    required this.id,
+    required this.title,
+    required this.lyricsURL,
+    required this.albumThumbnail,
+    required this.artist,
+  });
 
   static SongResultItem fromJson(dynamic json) {
     return SongResultItem(
-        title: json['title'] as String,
-        lyricsURL: json['url'] as String,
-        thumbnailURL: json['header_image_thumbnail_url'] as String,
-        artistName: Artist.fromJson(json['primary_artist']).name);
+      id: json['id'] as int,
+      title: json['title'] as String,
+      lyricsURL: json['url'] as String,
+      albumThumbnail: json['header_image_thumbnail_url'] as String,
+      artist: Artist.fromJson(json['primary_artist']).name,
+    );
   }
 }

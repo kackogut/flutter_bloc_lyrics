@@ -1,4 +1,5 @@
 class S {
+  static const String APP_NAME = "app_name";
   static const String TITLE = "labels.title";
   static const String LYRICS = "labels.lyrics";
   static const String ARTIST = "labels.artist";
