@@ -6,7 +6,7 @@ import 'package:flutter_bloc_lyrics/feature/song/add_edit/bloc/song_add_edit.dar
 import 'package:flutter_bloc_lyrics/feature/song/search/bloc/songs_search_event.dart';
 import 'package:flutter_bloc_lyrics/feature/song/search/bloc/songs_search_state.dart';
 import 'package:flutter_bloc_lyrics/model/api/search_result_error.dart';
-import 'package:flutter_bloc_lyrics/model/song_base.dart';
+import 'package:flutter_bloc_lyrics/model/domain/song_base.dart';
 import 'package:flutter_bloc_lyrics/repository/lyrics_repository.dart';
 import 'package:rxdart/rxdart.dart';
 

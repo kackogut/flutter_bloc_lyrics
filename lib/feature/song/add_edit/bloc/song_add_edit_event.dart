@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc_lyrics/model/song_base.dart';
+import 'package:flutter_bloc_lyrics/model/domain/local_song.dart';
+import 'package:flutter_bloc_lyrics/model/domain/song_base.dart';
 
 abstract class SongAddEditEvent extends Equatable{
   @override
@@ -7,7 +8,7 @@ abstract class SongAddEditEvent extends Equatable{
 }
 
 class AddSong extends SongAddEditEvent {
-  final SongBase song;
+  final LocalSong song;
 
   AddSong({required this.song});
 
@@ -19,7 +20,7 @@ class AddSong extends SongAddEditEvent {
 }
 
 class EditSong extends SongAddEditEvent {
-  final SongBase song;
+  final LocalSong song;
 
   EditSong({required this.song});
 

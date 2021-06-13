@@ -8,10 +8,11 @@ import 'package:flutter_bloc_lyrics/repository/lyrics_client.dart';
 import 'package:flutter_bloc_lyrics/repository/lyrics_repository.dart';
 
 import 'feature/song/search/bloc/songs_search_bloc.dart';
+import 'model/mapper/song_mapper.dart';
 
 Future<void> main() async {
   final LyricsRepository _lyricsRepository =
-      LyricsRepository(LyricsClient(), LocalClient());
+      LyricsRepository(LyricsClient(songMapper: SongMapper()), LocalClient());
 
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();

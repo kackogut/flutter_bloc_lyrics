@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_lyrics/feature/song/add_edit/bloc/song_add_edit.dart';
 import 'package:flutter_bloc_lyrics/feature/song/add_edit/ui/song_add_edit_form.dart';
-import 'package:flutter_bloc_lyrics/model/song_base.dart';
+import 'package:flutter_bloc_lyrics/model/domain/local_song.dart';
+import 'package:flutter_bloc_lyrics/model/domain/song_base.dart';
 import 'package:flutter_bloc_lyrics/resources/langs/strings.dart';
 import 'package:flutter_bloc_lyrics/widgets/loading.dart';
 
 class SongAddScreen extends StatefulWidget {
-  final SongBase? song;
+  final LocalSong? song;
 
   SongAddScreen({this.song});
 
@@ -19,7 +20,7 @@ class SongAddScreen extends StatefulWidget {
 }
 
 class SongAddScreenState extends State<StatefulWidget> {
-  final SongBase? song;
+  final LocalSong? song;
 
   SongAddScreenState({this.song});
 

@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_lyrics/feature/song/add_edit/bloc/song_add_edit.dart';
 import 'package:flutter_bloc_lyrics/feature/song/add_edit/ui/song_add_edit_screen.dart';
-import 'package:flutter_bloc_lyrics/model/song_base.dart';
+import 'package:flutter_bloc_lyrics/model/domain/local_song.dart';
+import 'package:flutter_bloc_lyrics/model/domain/song_base.dart';
 import 'package:flutter_bloc_lyrics/resources/langs/strings.dart';
 
 class LocalSongDetails extends StatefulWidget {
-  final SongBase song;
+  final LocalSong song;
 
   LocalSongDetails({required this.song});
 
@@ -18,7 +19,7 @@ class LocalSongDetails extends StatefulWidget {
 }
 
 class LocalSongDetailsState extends State<LocalSongDetails> {
-  SongBase song;
+  LocalSong song;
 
   late SongAddEditBloc _songAddEditBloc;
 
@@ -32,6 +33,7 @@ class LocalSongDetailsState extends State<LocalSongDetails> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: Change to BlocBuilder
     return BlocListener<SongAddEditBloc, SongAddEditState>(
         bloc: _songAddEditBloc,
         listener: (context, state) {
@@ -73,7 +75,8 @@ class LocalSongDetailsState extends State<LocalSongDetails> {
             padding: EdgeInsets.only(top: 16.0),
           ),
           Text(
-            song.lyrics ?? "",
+            song.lyrics,
+            // TODO: fix app themes
             style: Theme.of(context).textTheme.body2,
           )
         ],

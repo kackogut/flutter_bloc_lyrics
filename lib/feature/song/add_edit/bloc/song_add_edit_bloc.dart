@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc_lyrics/feature/song/add_edit/bloc/song_add_edit_event.dart';
 import 'package:flutter_bloc_lyrics/feature/song/add_edit/bloc/song_add_edit_state.dart';
-import 'package:flutter_bloc_lyrics/model/song_base.dart';
+import 'package:flutter_bloc_lyrics/model/domain/local_song.dart';
+import 'package:flutter_bloc_lyrics/model/domain/song_base.dart';
 import 'package:flutter_bloc_lyrics/repository/lyrics_repository.dart';
 
+// TODO: change to cubit
 class SongAddEditBloc extends Bloc<SongAddEditEvent, SongAddEditState> {
   final LyricsRepository lyricsRepository;
 
@@ -29,7 +31,7 @@ class SongAddEditBloc extends Bloc<SongAddEditEvent, SongAddEditState> {
 
   Stream<SongAddEditState> _mapSongEditToState(EditSong event) async* {
     yield StateLoading();
-    SongBase updatedSong = await lyricsRepository.editSong(event.song);
+    LocalSong updatedSong = await lyricsRepository.editSong(event.song);
     yield EditSongStateSuccess(updatedSong);
   }
 }

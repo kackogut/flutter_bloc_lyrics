@@ -27,8 +27,7 @@ class _SearchBarState extends State<SearchBar> {
         _songSearchBloc.add(TextChanged(query: text));
       },
       decoration: InputDecoration(
-          prefixIcon: Icon(Icons.search),
-          hintText: S.SEARCH_LYRICS.tr()),
+          prefixIcon: Icon(Icons.search), hintText: S.SEARCH_LYRICS.tr()),
     );
   }
 

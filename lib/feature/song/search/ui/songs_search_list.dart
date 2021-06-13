@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_lyrics/feature/song/details/song_details_screen.dart';
 import 'package:flutter_bloc_lyrics/feature/song/search/bloc/songs_search.dart';
-import 'package:flutter_bloc_lyrics/model/song_base.dart';
+import 'package:flutter_bloc_lyrics/model/domain/local_song.dart';
+import 'package:flutter_bloc_lyrics/model/domain/network_song.dart';
+import 'package:flutter_bloc_lyrics/model/domain/song_base.dart';
 import 'package:flutter_bloc_lyrics/resources/langs/strings.dart';
 
 class SongsSearchList extends StatelessWidget {
@@ -15,7 +17,7 @@ class SongsSearchList extends StatelessWidget {
         if (state is SearchStateLoading) {
           return Padding(
               padding: EdgeInsets.only(top: 16.0),
-              child:Center(child: CircularProgressIndicator()));
+              child: Center(child: CircularProgressIndicator()));
         }
         if (state is SearchStateError) {
           return Text(state.error);
@@ -47,12 +49,13 @@ class _SongsSearchResults extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        itemCount: songsList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return _SongSearchResultItem(
-            song: songsList[index],
-          );
-        });
+      itemCount: songsList.length,
+      itemBuilder: (BuildContext context, int index) {
+        return _SongSearchResultItem(
+          song: songsList[index],
+        );
+      },
+    );
   }
 }
 
@@ -63,16 +66,15 @@ class _SongSearchResultItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return song.lyricsURL != null
+    return song is NetworkSong
         ? _getSongDetailsLayout(context)
         : Dismissible(
             background: Container(
               color: Colors.red,
             ),
             onDismissed: (direction) {
-              // TODO: fix id
               BlocProvider.of<SongsSearchBloc>(context)
-                  .add(RemoveSong(songID: song.id ?? 0));
+                  .add(RemoveSong(songID: song.id));
             },
             key: Key(UniqueKey().toString()),
             child: _getSongDetailsLayout(context));
@@ -82,17 +84,17 @@ class _SongSearchResultItem extends StatelessWidget {
     return Padding(
         padding: EdgeInsets.symmetric(vertical: 8.0),
         child: ListTile(
-          leading: song.albumThumbnail == null
+          leading: song is LocalSong
               ? Icon(Icons.sd_card)
               : Image.network(
-                  song.albumThumbnail!,
+                  (song as NetworkSong).albumThumbnail,
                 ),
           title: Text(song.title),
           onTap: () {
             Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => SongDetailsScreen(song)));
+              context,
+              MaterialPageRoute(builder: (context) => SongDetailsScreen(song)),
+            );
           },
         ));
   }
