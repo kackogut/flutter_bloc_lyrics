@@ -11,15 +11,15 @@ class SongAddEditBloc extends Cubit<SongAddEditState> {
 
   SongAddEditBloc({required this.lyricsRepository}) : super(StateShowSong());
 
-  Stream<SongAddEditState> addSong(LocalSong song) async* {
-    yield StateLoading();
+  Future<void> addSong(LocalSong song) async {
+    emit(StateLoading());
     SongBase updatedSong = await lyricsRepository.addSong(song);
-    yield AddSongStateSuccess(updatedSong);
+    emit(AddSongStateSuccess(updatedSong));
   }
 
-  Stream<SongAddEditState> editSong(LocalSong song) async* {
-    yield StateLoading();
+  Future<void> editSong(LocalSong song) async {
+    emit(StateLoading());
     LocalSong updatedSong = await lyricsRepository.editSong(song);
-    yield EditSongStateSuccess(updatedSong);
+    emit(EditSongStateSuccess(updatedSong));
   }
 }

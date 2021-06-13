@@ -15,6 +15,7 @@ class MetaResponse {
 
   static MetaResponse fromJson(dynamic json) {
     return MetaResponse(
-        searchResultError: SearchResultError.fromJson(json['meta']));
+      searchResultError: SearchResultError.fromJson(json['meta']),
+    );
   }
 }

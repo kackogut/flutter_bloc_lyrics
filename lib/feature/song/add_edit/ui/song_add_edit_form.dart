@@ -55,9 +55,7 @@ class SongAddState extends State<SongAddForm> {
                 decoration: InputDecoration(hintText: S.TITLE.tr()),
                 onSaved: (value) => _title = value,
                 validator: (val) {
-                  return val
-                      ?.trim()
-                      .isEmpty == true
+                  return val?.trim().isEmpty == true
                       ? S.EMPTY_TITLE.tr()
                       : null;
                 },
@@ -67,9 +65,7 @@ class SongAddState extends State<SongAddForm> {
                 decoration: InputDecoration(hintText: S.ARTIST.tr()),
                 onSaved: (value) => _artist = value,
                 validator: (val) {
-                  return val
-                      ?.trim()
-                      .isEmpty == true
+                  return val?.trim().isEmpty == true
                       ? S.EMPTY_ARTIST.tr()
                       : null;
                 },
@@ -79,9 +75,7 @@ class SongAddState extends State<SongAddForm> {
                 decoration: InputDecoration(hintText: S.LYRICS.tr()),
                 onSaved: (value) => _lyrics = value,
                 validator: (val) {
-                  return val
-                      ?.trim()
-                      .isEmpty == true
+                  return val?.trim().isEmpty == true
                       ? S.EMPTY_LYRICS.tr()
                       : null;
                 },
@@ -90,24 +84,25 @@ class SongAddState extends State<SongAddForm> {
               ),
               Spacer(),
               Padding(
-                  padding: EdgeInsets.only(bottom: 16.0),
-                  child: getBaseButton(
-                      onPressed: () {
-                        if (_formKey.currentState?.validate() == true) {
-                          _formKey.currentState?.save();
-                          // TODO: fix id
-                          LocalSong updatedSong = LocalSong(
-                            id: _song?.id ?? -1,
-                            title: _title ?? "",
-                            lyrics: _lyrics ?? "",
-                            artist: _artist ?? "",
-                          );
-                          _song == null
-                              ? _songAddEditBloc.editSong(updatedSong)
-                              : _songAddEditBloc.addSong(updatedSong);
-                        }
-                      },
-                      text: (_song != null ? S.EDIT : S.ADD_SONG).tr()))
+                padding: EdgeInsets.only(bottom: 16.0),
+                child: getBaseButton(
+                    onPressed: () {
+                      if (_formKey.currentState?.validate() == true) {
+                        _formKey.currentState?.save();
+                        // TODO: fix id
+                        LocalSong updatedSong = LocalSong(
+                          id: _song?.id ?? -1,
+                          title: _title ?? "",
+                          lyrics: _lyrics ?? "",
+                          artist: _artist ?? "",
+                        );
+                        _song == null
+                            ? _songAddEditBloc.addSong(updatedSong)
+                            : _songAddEditBloc.editSong(updatedSong);
+                      }
+                    },
+                    text: (_song != null ? S.EDIT : S.ADD_SONG).tr()),
+              )
             ],
           ),
         ),

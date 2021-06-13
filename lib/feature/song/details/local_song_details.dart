@@ -53,34 +53,35 @@ class LocalSongDetailsState extends State<LocalSongDetails> {
   }
 
   Padding _getScreenBody(BuildContext context) => Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: SingleChildScrollView(
           child: Column(
-        children: <Widget>[
-          const Padding(
-            padding: EdgeInsets.only(top: 8.0),
+            children: <Widget>[
+              const Padding(
+                padding: EdgeInsets.only(top: 8.0),
+              ),
+              Text(
+                song.artist,
+                style: Theme.of(context).textTheme.subtitle2,
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 8.0),
+              ),
+              Text(
+                song.title,
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 16.0),
+              ),
+              Text(
+                song.lyrics,
+                style: Theme.of(context).textTheme.bodyText1,
+              )
+            ],
           ),
-          Text(
-            song.artist,
-            style: Theme.of(context).textTheme.subtitle,
-          ),
-          const Padding(
-            padding: EdgeInsets.only(top: 8.0),
-          ),
-          Text(
-            song.title,
-            style: Theme.of(context).textTheme.title,
-          ),
-          const Padding(
-            padding: EdgeInsets.only(top: 16.0),
-          ),
-          Text(
-            song.lyrics,
-            // TODO: fix app themes
-            style: Theme.of(context).textTheme.body2,
-          )
-        ],
-      )));
+        ),
+      );
 
   FloatingActionButton _getFloatingButton(BuildContext context) =>
       FloatingActionButton(
@@ -92,7 +93,7 @@ class LocalSongDetailsState extends State<LocalSongDetails> {
             ),
           );
         },
-        tooltip: "Edit",
+        tooltip: S.EDIT.tr(),
         child: Icon(Icons.edit),
       );
 }
